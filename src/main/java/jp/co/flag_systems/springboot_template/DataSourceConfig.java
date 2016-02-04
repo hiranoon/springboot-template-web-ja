@@ -27,19 +27,18 @@ public class DataSourceConfig {
     @Bean
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() {
-        String url = System.getenv("JDBC_DATABASE_URL"); // Heroku で定義されています。
+        // 環境変数 JDBC_DATABASE_URL は、Heroku で定義されています。以下の様な形式です。
+        // jdbc:mysql://<host>:<port>/<dbname>?user=<username>&password=<password>
+        String url = System.getenv("JDBC_DATABASE_URL");
         DataSourceBuilder factory;
         if (url != null) {
-System.out.println("#######################");
-System.out.println("#######################");
-System.out.println(url);
-System.out.println("#######################");
-System.out.println("#######################");
             // JDBC_DATABASE_URL の設定を利用します。
+            // 日本語文字化けが発生しないよう文字エンコーディング指定を追加します。
             factory = DataSourceBuilder
                     .create(this.properties.getClassLoader())
-                    .url(url);
+                    .url(url + "&characterEncoding=utf8");
         } else {
+            // JDBC_DATABASE_URL が設定されていないため Heroku 以外の環境です。
             // プロパティファイルを利用します。
             factory = DataSourceBuilder
                     .create(this.properties.getClassLoader())
@@ -48,9 +47,6 @@ System.out.println("#######################");
                     .password(this.properties.getPassword());
         }
         return factory.build();
-//
-//
-//        return DataSourceBuilder.create().build();
     }
 
 }
