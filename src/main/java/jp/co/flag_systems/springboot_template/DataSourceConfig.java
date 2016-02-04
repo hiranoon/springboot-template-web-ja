@@ -30,6 +30,10 @@ public class DataSourceConfig {
         String url = System.getenv("DATABASE_URL"); // Heroku で定義されています。
         DataSourceBuilder factory;
         if (url != null) {
+System.out.println("############################");
+System.out.println("1:" + System.getenv("DATABASE_URL"));
+System.out.println("2:" + System.getenv("JDBC_DATABASE_URL"));
+System.out.println("############################");
             // JDBC_DATABASE_URL の設定を利用します。
             factory = DataSourceBuilder
                     .create(this.properties.getClassLoader())
