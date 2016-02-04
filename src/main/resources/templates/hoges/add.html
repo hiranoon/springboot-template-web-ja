@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ホゲ追加</title>
+  <!-- そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われる。-->
+  <!-- th:href では、@{}でコンテクスト相対パスを絶対パスに置換している。 -->
+  <link rel="stylesheet"
+    href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
+    th:href="@{/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css"
+    href="../../static/css/style.css"
+    th:href="@{/css/style.css}">
+</head>
+<body>
+  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <div class="container">
+      <a class="navbar-brand" href="#">Spring Boot Template</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+<!--
+  <p>
+    <span sec:authentication="principal.user.username">duke</span>さんログイン中。
+    <a th:href="@{/logout}">ログアウト</a>
+  </p>
+ -->
+    </div><!-- /.container -->
+  </nav><!-- /.navbar -->
+
+  <div class="container">
+    <h2>ホゲ追加</h2>
+    <!-- th:object="${hogeForm}" で、hogeForm を指定しておくと、子要素の中で hogeForm.xxx と書かずに済みます -->
+    <form th:action="@{/hoges/create}" th:object="${hogeForm}" method="post">
+      <!-- th:field="*{squadNumber}" で、hogeForm のプロパティとバインディングしています -->
+      <fieldset class="form-group"
+        th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'">
+        <label for="squadNumber" class="form-control-label">背番号</label>
+        <input type="text" class="form-control"
+          id="squadNumber"
+          name="squadNumber"
+          th:field="*{squadNumber}"
+          th:classappend="${#fields.hasErrors('squadNumber')}? 'form-control-danger'">
+        <small class="text-danger"
+          th:if="${#fields.hasErrors('squadNumber')}"
+          th:errors="*{squadNumber}">error occurred !!</small>
+      </fieldset>
+      <fieldset class="form-group"
+        th:classappend="${#fields.hasErrors('name')}? 'has-danger'">
+        <label for="name" class="form-control-label">名前</label>
+        <input type="text" class="form-control"
+          id="name"
+          name="name"
+          th:field="*{name}"
+          th:classappend="${#fields.hasErrors('name')}? 'form-control-danger'">
+        <small class="text-danger"
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}">error occurred !!</small>
+      </fieldset>
+      <fieldset class="form-group"
+        th:classappend="${#fields.hasErrors('nationality')}? 'has-danger'">
+        <label for="nationality" class="form-control-label">国籍</label>
+        <input type="text" class="form-control"
+          id="nationality"
+          name="nationality"
+          th:field="*{nationality}"
+          th:classappend="${#fields.hasErrors('nationality')}? 'form-control-danger'">
+        <small class="text-danger"
+          th:if="${#fields.hasErrors('nationality')}"
+          th:errors="*{nationality}">error occurred !!</small>
+      </fieldset>
+      <fieldset class="form-group"
+        th:classappend="${#fields.hasErrors('positionCode')}? 'has-danger'">
+        <label for="positionCode" class="form-control-label">ポジション</label>
+        <input type="text" class="form-control"
+          id="positionCode"
+          name="positionCode"
+          th:field="*{positionCode}"
+          th:classappend="${#fields.hasErrors('positionCode')}? 'form-control-danger'">
+        <small class="text-danger"
+          th:if="${#fields.hasErrors('positionCode')}"
+          th:errors="*{positionCode}">error occurred !!</small>
+      </fieldset>
+      <a th:href="@{/hoges}" class="btn btn-secondary">戻る</a>
+      <button type="submit" class="btn btn-primary">追加</button>
+    </form>
+  </div>
+
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+    th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+  <script
+    src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"
+    th:src="@{/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

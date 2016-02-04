@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: dev
+  thymeleaf:
+    cache: false # 開発用にキャッシュをさせない
+    mode: LEGACYHTML5 # NekoHTMLを利用する
+security:
+  basic:
+    enabled: false # basic認証を無効化
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    sql-script-encoding: UTF-8
+    url: jdbc:log4jdbc:h2:file:./temp/testdb
+    username: sa
+    password:
+    testOnBorrow: true
+    validationQuery: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: none # DDLの実行をJPAでは行わない
+---
+spring:
+  profiles: heroku
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    sql-script-encoding: UTF-8
+    testOnBorrow: true
+    validationQuery: SELECT 1
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: none # DDLの実行をJPAでは行わない

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ホゲ一覧</title>
+  <!-- そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われる。-->
+  <!-- th:href では、@{}でコンテクスト相対パスを絶対パスに置換している。 -->
+  <link rel="stylesheet"
+    href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
+    th:href="@{/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css"
+    href="../../static/css/style.css"
+    th:href="@{/css/style.css}">
+</head>
+<body>
+  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <div class="container">
+      <a class="navbar-brand" href="#">Spring Boot Template</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+<!--
+  <p>
+    <span sec:authentication="principal.user.username">duke</span>さんログイン中。
+    <a th:href="@{/logout}">ログアウト</a>
+  </p>
+ -->
+    </div><!-- /.container -->
+  </nav><!-- /.navbar -->
+
+  <div class="container">
+
+    <h2>ホゲ一覧</h2>
+
+    <div class="container m-b-1">
+      <!-- @{}でコンテクスト相対パスを絶対パスに置換できます -->
+      <a th:href="@{/hoges/add}" class="btn btn-primary">追加</a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>背番号</th>
+            <th>名前</th>
+            <th>国籍</th>
+            <th>ポジション</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="hoge : ${hoges}">
+            <td th:text="${hoge.squadNumber}">100</td>
+            <td th:text="${hoge.name}">山田太郎</td>
+            <td th:text="${hoge.nationality}">トリニダード・トバゴ</td>
+            <td th:text="${hoge.positionCode}">FW</td>
+            <td>
+              <form th:action="@{/hoges/{id}/destroy(id=${hoge.id})}" method="post">
+                <a class="btn btn-primary" th:href="@{/hoges/{id}/edit(id=${hoge.id})}">編集</a>
+                <a class="btn btn-danger" data-toggle="modal" data-target="#destroyConfirmModal" th:attr="data-id=${hoge.id}">削除</a>
+                <button type="submit" th:id="${'destroySubmit_' + hoge.id}" class="hidden-xs-up">削除</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- /.table-responsive -->
+  </div><!-- /.container -->
+
+  <!-- 削除確認ダイアログ -->
+  <div class="modal fade" id="destroyConfirmModal" tabindex="-1" role="dialog" aria-labelledby="destroyConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>削除します。よろしいですか？</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger" id="destroySubmitTrigger">削除</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+    th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+  <script
+    src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"
+    th:src="@{/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js}"></script>
+  <script
+    src="../../static/hoges.js"
+    th:src="@{/js/hoges.js}"></script>
+</body>
+</html>

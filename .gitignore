@@ -1,0 +1,28 @@
+# Java
+*.class
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Gradle
+.gradle
+
+# Build
+build/
+bin/
+out
+
+# Other
+*.log
+*.swp
+*.bak
+
+temp/
+.factorypath
+.springBeans
