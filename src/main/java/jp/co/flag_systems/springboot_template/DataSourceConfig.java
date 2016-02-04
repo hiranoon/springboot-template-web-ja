@@ -27,13 +27,13 @@ public class DataSourceConfig {
     @Bean
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() {
-        String url = System.getenv("JDBC_DATABASE_URL"); // Heroku で定義されています。
+        String url = System.getenv("DATABASE_URL"); // Heroku で定義されています。
         DataSourceBuilder factory;
         if (url != null) {
             // JDBC_DATABASE_URL の設定を利用します。
             factory = DataSourceBuilder
                     .create(this.properties.getClassLoader())
-                    .url(url);
+                    .url("jdbc:" + url);
         } else {
             // プロパティファイルを利用します。
             factory = DataSourceBuilder
