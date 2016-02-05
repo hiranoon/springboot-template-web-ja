@@ -1,4 +1,4 @@
-package jp.co.flag_systems.springboot_template;
+package jp.co.flag_systems.springboot_template.config;
 
 import javax.sql.DataSource;
 
