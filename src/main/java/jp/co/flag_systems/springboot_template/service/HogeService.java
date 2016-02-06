@@ -1,10 +1,10 @@
 package jp.co.flag_systems.springboot_template.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jp.co.flag_systems.springboot_template.domain.Hoge;
@@ -22,11 +22,12 @@ public class HogeService {
     HogeRepository hogeRepository;
 
     /**
-     * Hoge を全件検索します.
-     * @return すべての Hoge の Domain クラスのリスト
+     * Hoge をページング指定条件にしたがって検索します.
+     * @param pageable ページング指定条件
+     * @return ページ指定された Hoge の Domain クラスのリスト
      */
-    public List<Hoge> findAll() {
-        return hogeRepository.findAll();
+    public Page<Hoge> findAll(Pageable pageable) {
+        return hogeRepository.findAll(pageable);
     }
 
     /**

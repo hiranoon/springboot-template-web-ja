@@ -9,5 +9,4 @@ import jp.co.flag_systems.springboot_template.domain.Hoge;
  * @author hirano
  */
 public interface HogeRepository extends JpaRepository<Hoge, Integer> {
-
 }

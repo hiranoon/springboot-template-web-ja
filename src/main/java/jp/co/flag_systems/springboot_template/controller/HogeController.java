@@ -1,9 +1,11 @@
 package jp.co.flag_systems.springboot_template.controller;
 
-import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,11 +51,17 @@ public class HogeController {
      * @return Hoge の一覧画面
      */
     @RequestMapping(method = RequestMethod.GET)
-    String index(Model model) {
+    String index(
+            @PageableDefault(size = 5,
+                page = 0,
+                sort = "squadNumber",
+                direction = Direction.ASC
+                ) Pageable pageable,
+            Model model
+            ) {
         // Hoge を全件取得します.
-        List<Hoge> hoges = hogeService.findAll();
-        model.addAttribute("hoges", hoges);
-
+        Page<Hoge> page = hogeService.findAll(pageable);
+        model.addAttribute("page", page);
         // Hoge の一覧画面を表示します.
         return "hoges/index";
     }
