@@ -97,7 +97,7 @@ public class HogeController {
         // エラーがないときはホゲを追加します。
         Hoge hoge = new Hoge();
         BeanUtils.copyProperties(form, hoge);
-        hogeService.create(hoge);
+        hogeService.create(hoge, form.getFugaId());
         // Hoge の一覧画面にリダイレクトします。
         return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます。
     }
@@ -143,7 +143,7 @@ public class HogeController {
         hoge.setId(id);
         // Hoge を更新します。
 // TODO 楽観的排他制御
-        hogeService.update(hoge);
+        hogeService.update(hoge, form.getFugaId());
         // Hoge の一覧画面にリダイレクトします。
         return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます。
     }

@@ -2,8 +2,11 @@ package jp.co.flag_systems.springboot_template.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * hoges テーブルの Domain クラス.
+ * このサンプルプログラムでは、選手のデータを表します.
  * @author hirano
  */
 @Entity
@@ -45,9 +49,23 @@ public class Hoge {
     @Column(nullable = false)
     private Integer positionCode;
 
+//    /**
+//     * 国籍.
+//     */
+//    @Column(nullable = false)
+//    private Integer fugaId;
+
     /**
-     * 国籍.
+     * {@link Fuga}.
      */
-    @Column(nullable = false)
-    private Integer fugaId;
+    // LAZY  : 必要になったタイミングで Fuga の問い合わせを行います。
+    // EAGER : 予め Fuga の問い合わせを行っておきます。
+    // 問い合わせるタイミングの違いだけで、結合するか、キャッシュを利用するか、
+    // の違いはありません。
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            nullable = false,
+            name = "fuga_id",            // 外部キー(結合元のカラム名)
+            referencedColumnName = "id") // 外部キー(結合先のカラム名) ※結合先と異なる場合にのみ指定が必要
+    private Fuga fuga;
 }

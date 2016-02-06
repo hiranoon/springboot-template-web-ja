@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jp.co.flag_systems.springboot_template.domain.Hoge;
+import jp.co.flag_systems.springboot_template.repository.FugaRepository;
 import jp.co.flag_systems.springboot_template.repository.HogeRepository;
 
 /**
@@ -20,6 +21,10 @@ public class HogeService {
     /** Hoge の Repository クラス */
     @Autowired
     HogeRepository hogeRepository;
+
+    /** Fuga の Repository クラス */
+    @Autowired
+    FugaRepository fugaRepository;
 
     /**
      * Hoge をページング指定条件にしたがって検索します.
@@ -42,18 +47,22 @@ public class HogeService {
     /**
      * Hoge を作成します.
      * @param hoge Hoge の Domain クラス
+     * @param fugaId Fuga の ID
      * @return 作成した Hoge の Domain クラス
      */
-    public Hoge create(Hoge hoge) {
+    public Hoge create(Hoge hoge, Integer fugaId) {
+        hoge.setFuga(fugaRepository.findOne(fugaId));
         return hogeRepository.save(hoge);
     }
 
     /**
      * Hoge を更新します.
      * @param hoge Hoge の Domain クラス
+     * @param fugaId Fuga の ID
      * @return 更新した Hoge の Domain クラス
      */
-    public Hoge update(Hoge hoge) {
+    public Hoge update(Hoge hoge, Integer fugaId) {
+        hoge.setFuga(fugaRepository.findOne(fugaId));
         return hogeRepository.save(hoge);
     }
 
