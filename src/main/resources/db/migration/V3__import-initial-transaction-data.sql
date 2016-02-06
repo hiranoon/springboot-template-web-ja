@@ -1,0 +1,28 @@
+/* ===== hoges ===== */
+insert into hoges(squad_number, position_code, fuga_id, name) values(1,  1, 1,  'ローマン・ヴァイデンフェラー');
+insert into hoges(squad_number, position_code, fuga_id, name) values(3,  2, 27, '朴柱昊');
+insert into hoges(squad_number, position_code, fuga_id, name) values(4,  2, 10, 'ネヴェン・スボティッチ');
+insert into hoges(squad_number, position_code, fuga_id, name) values(6,  3, 1,  'スヴェン・ベンダー');
+insert into hoges(squad_number, position_code, fuga_id, name) values(8,  3, 1,  'イルカイ・ギュンドアン');
+insert into hoges(squad_number, position_code, fuga_id, name) values(10, 3, 67, 'ヘンリク・ムヒタリアン');
+insert into hoges(squad_number, position_code, fuga_id, name) values(11, 4, 1,  'マルコ・ロイス');
+insert into hoges(squad_number, position_code, fuga_id, name) values(13, 2, 68, 'ジョン・ゴレンシ・スタンコビッチ');
+insert into hoges(squad_number, position_code, fuga_id, name) values(14, 3, 1,  'モリッツ・ライトナー');
+insert into hoges(squad_number, position_code, fuga_id, name) values(15, 2, 1,  'マッツ・フメルス');
+insert into hoges(squad_number, position_code, fuga_id, name) values(17, 3, 69, 'ピエール＝エメリク・オーバメヤン');
+insert into hoges(squad_number, position_code, fuga_id, name) values(18, 3, 9,  'ヌリ・シャヒン');
+insert into hoges(squad_number, position_code, fuga_id, name) values(20, 4, 62, 'アドリアン・ラモス');
+insert into hoges(squad_number, position_code, fuga_id, name) values(22, 3, 16, 'クリスチャン・プリシッチ');
+insert into hoges(squad_number, position_code, fuga_id, name) values(23, 3, 8,  '香川真司');
+insert into hoges(squad_number, position_code, fuga_id, name) values(24, 2, 1,  'マリアン・ザー');
+insert into hoges(squad_number, position_code, fuga_id, name) values(25, 2, 12, 'ソクラティス・パパスタソプーロス');
+insert into hoges(squad_number, position_code, fuga_id, name) values(26, 2, 14, 'ウカシュ・ピシュチェク');
+insert into hoges(squad_number, position_code, fuga_id, name) values(27, 3, 1,  'ゴンサロ・カストロ');
+insert into hoges(squad_number, position_code, fuga_id, name) values(28, 2, 1,  'マティアス・ギンター');
+insert into hoges(squad_number, position_code, fuga_id, name) values(29, 2, 1,  'マルセル・シュメルツァー');
+insert into hoges(squad_number, position_code, fuga_id, name) values(30, 3, 1,  'フェリックス・パスラック');
+insert into hoges(squad_number, position_code, fuga_id, name) values(33, 3, 1,  'ユリアン・ヴァイグル');
+insert into hoges(squad_number, position_code, fuga_id, name) values(34, 4, 1,  'マーヴィン・ドゥクシュ');
+insert into hoges(squad_number, position_code, fuga_id, name) values(37, 2, 1,  'エリック・ドゥルム');
+insert into hoges(squad_number, position_code, fuga_id, name) values(38, 1, 4 , 'ロマン・ビュルキ');
+insert into hoges(squad_number, position_code, fuga_id, name) values(39, 1, 1,  'ヘンドリック・ボンマン');

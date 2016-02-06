@@ -41,7 +41,8 @@ public class HogeForm {
     /**
      * 国籍.
      */
-    @NotBlank // 空文字やスペースのみをエラーにします。
-    @Size(min = 1, max = 15)
-    private String nationality;
+    @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています。
+    @Min(1)
+    @Max(99)
+    private Integer fugaId;
 }

@@ -3,5 +3,10 @@ CREATE TABLE hoges (
     squad_number INT,
     name VARCHAR(100),
     position_code INT,
-    nationality VARCHAR(30)
+    fuga_id INT
+);
+
+CREATE TABLE fugas (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
 );

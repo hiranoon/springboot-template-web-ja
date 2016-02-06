@@ -66,7 +66,7 @@
           <tr th:each="hoge : ${page}">
             <td th:text="${hoge.squadNumber}">10</td>
             <td th:text="${hoge.name}">山田太郎</td>
-            <td th:text="${hoge.nationality}">トリニダード・トバゴ</td>
+            <td th:text="${hoge.fugaId}">トリニダード・トバゴ</td>
             <td th:text="${hoge.positionCode}">FW</td>
             <td>
               <form th:action="@{/hoges/{id}/destroy(id=${hoge.id})}" method="post">

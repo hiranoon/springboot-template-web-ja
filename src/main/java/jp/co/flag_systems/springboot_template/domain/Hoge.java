@@ -49,5 +49,5 @@ public class Hoge {
      * 国籍.
      */
     @Column(nullable = false)
-    private String nationality;
+    private Integer fugaId;
 }
