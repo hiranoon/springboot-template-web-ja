@@ -104,43 +104,44 @@ public class HogeController {
 
     /**
      * Hoge の更新画面を表示します.
-     * @param id パスパラメータに設定された ID
+     * @param hogeId パスパラメータに設定された ID
      * @param form ブランクの {@link HogeForm} オブジェクト
      * @return Hoge の更新画面
      */
-    @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "{hogeId}/edit", method = RequestMethod.GET)
     String edit(
-            @PathVariable("id") Integer id,
+            @PathVariable("hogeId") Integer hogeId,
             HogeForm form) {
         // パスパラメータの ID よりホゲを検索します。
-        Hoge hoge = hogeService.findOne(id);
+        Hoge hoge = hogeService.findOne(hogeId);
         // 検索結果を Form にコピーします。
         BeanUtils.copyProperties(hoge, form);
+        form.setFugaId(hoge.getFuga().getFugaId());
         // 更新画面を表示します。
         return "hoges/edit";
     }
 
     /**
      * Hoge を更新します.
-     * @param id リクエストパラメータ（hidden）のid
+     * @param hogeId リクエストパラメータ（hidden）の hogeId
      * @param form 画面入力内容
      * @param result 入力チェック結果
      * @return Hoge の一覧画面
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
     String update(
-            @RequestParam Integer id,
+            @RequestParam Integer hogeId,
             @Validated HogeForm form,
             BindingResult result
             ) {
         // エラーが有るときは更新画面に戻ります。
         if (result.hasErrors()) {
-            return edit(id, form);
+            return edit(hogeId, form);
         }
         // Form より Hoge オブジェクトを生成します。
         Hoge hoge = new Hoge();
         BeanUtils.copyProperties(form, hoge);
-        hoge.setId(id);
+        hoge.setHogeId(hogeId);
         // Hoge を更新します。
 // TODO 楽観的排他制御
         hogeService.update(hoge, form.getFugaId());
@@ -150,14 +151,14 @@ public class HogeController {
 
     /**
      * Hoge を削除します.
-     * @param id パスパラメータに設定された ID
+     * @param hogeId パスパラメータに設定された ID
      * @return Hoge の一覧画面
      */
-    @RequestMapping(value = "{id}/destroy", method = RequestMethod.POST)
-    String destroy(@PathVariable("id") Integer id) {
+    @RequestMapping(value = "{hogeId}/destroy", method = RequestMethod.POST)
+    String destroy(@PathVariable("hogeId") Integer hogeId) {
         // Hoge を削除します。
 // TODO 楽観的排他制御
-        hogeService.delete(id);
+        hogeService.delete(hogeId);
         // Hoge の一覧画面にリダイレクトします。
         return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます。
     }

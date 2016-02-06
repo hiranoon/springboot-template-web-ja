@@ -69,10 +69,10 @@
             <td th:text="${hoge.fuga.name}">トリニダード・トバゴ</td>
             <td th:text="${hoge.positionCode}">FW</td>
             <td>
-              <form th:action="@{/hoges/{id}/destroy(id=${hoge.id})}" method="post">
-                <a class="btn btn-primary" th:href="@{/hoges/{id}/edit(id=${hoge.id})}">編集</a>
-                <a class="btn btn-danger" data-toggle="modal" data-target="#destroyConfirmModal" th:attr="data-id=${hoge.id}">削除</a>
-                <button type="submit" th:id="${'destroySubmit_' + hoge.id}" class="hidden-xs-up">削除</button>
+              <form th:action="@{/hoges/{hogeId}/destroy(hogeId=${hoge.hogeId})}" method="post">
+                <a class="btn btn-primary" th:href="@{/hoges/{hogeId}/edit(hogeId=${hoge.hogeId})}">編集</a>
+                <a class="btn btn-danger" data-toggle="modal" data-target="#destroyConfirmModal" th:attr="data-id=${hoge.hogeId}">削除</a>
+                <button type="submit" th:id="${'destroySubmit_' + hoge.hogeId}" class="hidden-xs-up">削除</button>
               </form>
             </td>
           </tr>
@@ -109,7 +109,7 @@
           </span>
         </li>
         <li class="page-item" th:if="${page.number - 2 > 0}">
-          <a class="page-link" th:href="@{/hoges(page=1,size=${page.size},sort=${param.sort})}">1</a>
+          <a class="page-link" th:href="@{/hoges(page=0,size=${page.size},sort=${param.sort})}">1</a>
         </li>
         <li class="page-item disabled" th:if="${page.number - 3 > 0}">
           <span class="page-link"><i class="fa fa-ellipsis-h"></i></span>

@@ -29,7 +29,7 @@ public class Hoge {
      */
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer hogeId;
 
     /**
      * 背番号.
@@ -63,9 +63,7 @@ public class Hoge {
     // 問い合わせるタイミングの違いだけで、結合するか、キャッシュを利用するか、
     // の違いはありません。
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            nullable = false,
-            name = "fuga_id",            // 外部キー(結合元のカラム名)
-            referencedColumnName = "id") // 外部キー(結合先のカラム名) ※結合先と異なる場合にのみ指定が必要
+    // 外部キー(結合元のカラム名) ※結合先のカラム名が異なる場合は referencedColumnName の指定も必要
+    @JoinColumn(nullable = false, name = "fuga_id")
     private Fuga fuga;
 }

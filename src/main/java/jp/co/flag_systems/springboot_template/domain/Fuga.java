@@ -27,7 +27,7 @@ public class Fuga {
      * ID.
      */
     @Id
-    private Integer id;
+    private Integer fugaId;
 
     /**
      * 名前.
