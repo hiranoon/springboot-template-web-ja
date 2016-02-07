@@ -81,11 +81,14 @@
       <fieldset class="form-group"
         th:classappend="${#fields.hasErrors('positionCode')}? 'has-danger'">
         <label for="positionCode" class="form-control-label">ポジション</label>
-        <input type="text" class="form-control"
-          id="positionCode"
-          name="positionCode"
-          th:field="*{positionCode}"
-          th:classappend="${#fields.hasErrors('positionCode')}? 'form-control-danger'">
+        <select class="form-control"
+          th:field="*{positionCode}">
+          <option
+            th:each="code : ${positionClasses}"
+            th:value="${code.codeId}"
+            th:text="${code.codeName}"
+            th:classappend="${#fields.hasErrors('positionCode')}? 'form-control-danger'">FW</option>
+        </select>
         <small class="text-danger"
           th:if="${#fields.hasErrors('positionCode')}"
           th:errors="*{positionCode}">error occurred !!</small>

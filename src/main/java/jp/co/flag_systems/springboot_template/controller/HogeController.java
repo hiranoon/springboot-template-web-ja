@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.co.flag_systems.springboot_template.common.constant.CodeConst;
 import jp.co.flag_systems.springboot_template.domain.Fuga;
 import jp.co.flag_systems.springboot_template.domain.Hoge;
 import jp.co.flag_systems.springboot_template.service.FugaService;
@@ -82,9 +83,11 @@ public class HogeController {
      */
     @RequestMapping(value = "add", method = RequestMethod.GET)
     String add(Model model) {
-        // プルダウン用に Fuga を全件取得します.
+        // プルダウン用に Fuga を全件セットします.
         List<Fuga> nationalities = fugaService.findAll();
         model.addAttribute("nationalities", nationalities);
+        // プルダウン用にポジションコードをセットします.
+        model.addAttribute("positionClasses", CodeConst.PositionClass.values());
         // Hoge の一覧画面を表示します.
         return "hoges/add";
     }
@@ -132,9 +135,11 @@ public class HogeController {
         // 検索結果を Form にコピーします。
         BeanUtils.copyProperties(hoge, form);
         form.setFugaId(hoge.getFuga().getFugaId());
-        // プルダウン用に Fuga を全件取得します.
+        // プルダウン用に Fuga を全件セットします.
         List<Fuga> nationalities = fugaService.findAll();
         model.addAttribute("nationalities", nationalities);
+        // プルダウン用にポジションコードをセットします.
+        model.addAttribute("positionClasses", CodeConst.PositionClass.values());
         // 更新画面を表示します。
         return "hoges/edit";
     }
