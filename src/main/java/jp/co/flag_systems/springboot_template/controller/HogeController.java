@@ -1,5 +1,7 @@
 package jp.co.flag_systems.springboot_template.controller;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.co.flag_systems.springboot_template.domain.Fuga;
 import jp.co.flag_systems.springboot_template.domain.Hoge;
+import jp.co.flag_systems.springboot_template.service.FugaService;
 import jp.co.flag_systems.springboot_template.service.HogeService;
 import jp.co.flag_systems.springboot_template.web.HogeForm;
 
@@ -31,6 +35,10 @@ public class HogeController {
     /** Hoge の Service クラス. */
     @Autowired
     HogeService hogeService;
+
+    /** Fuga の Service クラス. */
+    @Autowired
+    FugaService fugaService;
 
     // @ModelAttribute があると @RequestMapping のメソッドの前に呼ばれます。
     // 返り値は自動で Model に追加されます。
@@ -52,14 +60,15 @@ public class HogeController {
      */
     @RequestMapping(method = RequestMethod.GET)
     String index(
-            @PageableDefault(size = 5,
+            @PageableDefault(
+                size = 5,
                 page = 0,
                 sort = "squadNumber",
                 direction = Direction.ASC
                 ) Pageable pageable,
             Model model
             ) {
-        // Hoge を全件取得します.
+        // Hoge を取得します.
         Page<Hoge> page = hogeService.findAll(pageable);
         model.addAttribute("page", page);
         // Hoge の一覧画面を表示します.
@@ -73,6 +82,9 @@ public class HogeController {
      */
     @RequestMapping(value = "add", method = RequestMethod.GET)
     String add(Model model) {
+        // プルダウン用に Fuga を全件取得します.
+        List<Fuga> nationalities = fugaService.findAll();
+        model.addAttribute("nationalities", nationalities);
         // Hoge の一覧画面を表示します.
         return "hoges/add";
     }
@@ -106,17 +118,23 @@ public class HogeController {
      * Hoge の更新画面を表示します.
      * @param hogeId パスパラメータに設定された ID
      * @param form ブランクの {@link HogeForm} オブジェクト
+     * @param model {@link Model} オブジェクト
      * @return Hoge の更新画面
      */
     @RequestMapping(value = "{hogeId}/edit", method = RequestMethod.GET)
     String edit(
             @PathVariable("hogeId") Integer hogeId,
-            HogeForm form) {
+            HogeForm form,
+            Model model
+            ) {
         // パスパラメータの ID よりホゲを検索します。
         Hoge hoge = hogeService.findOne(hogeId);
         // 検索結果を Form にコピーします。
         BeanUtils.copyProperties(hoge, form);
         form.setFugaId(hoge.getFuga().getFugaId());
+        // プルダウン用に Fuga を全件取得します.
+        List<Fuga> nationalities = fugaService.findAll();
+        model.addAttribute("nationalities", nationalities);
         // 更新画面を表示します。
         return "hoges/edit";
     }
@@ -126,17 +144,19 @@ public class HogeController {
      * @param hogeId リクエストパラメータ（hidden）の hogeId
      * @param form 画面入力内容
      * @param result 入力チェック結果
+     * @param model {@link Model} オブジェクト
      * @return Hoge の一覧画面
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
     String update(
             @RequestParam Integer hogeId,
             @Validated HogeForm form,
-            BindingResult result
+            BindingResult result,
+            Model model
             ) {
         // エラーが有るときは更新画面に戻ります。
         if (result.hasErrors()) {
-            return edit(hogeId, form);
+            return edit(hogeId, form, model);
         }
         // Form より Hoge オブジェクトを生成します。
         Hoge hoge = new Hoge();
