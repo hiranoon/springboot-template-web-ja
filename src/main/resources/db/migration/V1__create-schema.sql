@@ -1,12 +1,12 @@
-CREATE TABLE hoges (
-    hoge_id INT PRIMARY KEY AUTO_INCREMENT,
-    squad_number INT,
-    name VARCHAR(100),
-    position_code VARCHAR(1),
-    fuga_id INT
+create table hoges (
+    hoge_id int primary key auto_increment,
+    squad_number int,
+    name varchar(100),
+    position_code varchar(1),
+    fuga_id int
 );
 
-CREATE TABLE fugas (
-    fuga_id INT PRIMARY KEY,
-    name VARCHAR(100)
+create table fugas (
+    fuga_id int primary key,
+    name varchar(100)
 );
