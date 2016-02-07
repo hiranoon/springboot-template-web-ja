@@ -18,7 +18,7 @@ public class CodeConst {
     /** ポジションコード */
     @Getter
     @AllArgsConstructor
-    public enum PositionClass implements Code {
+    public enum PositionCode implements Code {
 
         /** ゴールキーパー */
         GK("1", "ゴールキーパー"),

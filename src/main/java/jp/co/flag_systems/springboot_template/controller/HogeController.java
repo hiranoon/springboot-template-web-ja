@@ -87,7 +87,7 @@ public class HogeController {
         List<Fuga> nationalities = fugaService.findAll();
         model.addAttribute("nationalities", nationalities);
         // プルダウン用にポジションコードをセットします.
-        model.addAttribute("positionClasses", CodeConst.PositionClass.values());
+        model.addAttribute("positionClasses", CodeConst.PositionCode.values());
         // Hoge の一覧画面を表示します.
         return "hoges/add";
     }
@@ -139,7 +139,7 @@ public class HogeController {
         List<Fuga> nationalities = fugaService.findAll();
         model.addAttribute("nationalities", nationalities);
         // プルダウン用にポジションコードをセットします.
-        model.addAttribute("positionClasses", CodeConst.PositionClass.values());
+        model.addAttribute("positionClasses", CodeConst.PositionCode.values());
         // 更新画面を表示します。
         return "hoges/edit";
     }
