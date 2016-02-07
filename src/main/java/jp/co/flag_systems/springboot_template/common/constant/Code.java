@@ -7,14 +7,14 @@ package jp.co.flag_systems.springboot_template.common.constant;
 public interface Code {
 
     /**
-     * コードのIDを返却します.
+     * コードIDを返却します.
      * @return コードのID
      */
-    public String getCodeId();
+    public String getId();
 
     /**
-     * コードのIDを値します.
+     * コード名称を返却します.
      * @return コードの値
      */
-    public String getCodeName();
+    public String getName();
 }

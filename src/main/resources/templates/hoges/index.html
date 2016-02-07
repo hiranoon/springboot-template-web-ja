@@ -67,7 +67,7 @@
             <td th:text="${hoge.squadNumber}">10</td>
             <td th:text="${hoge.name}">山田太郎</td>
             <td th:text="${hoge.fuga.name}">トリニダード・トバゴ</td>
-            <td th:text="${hoge.positionCode}">FW</td>
+            <td th:text="${hoge.positionCodeName}">ゴールキーパー</td>
             <td>
               <form th:action="@{/hoges/{hogeId}/destroy(hogeId=${hoge.hogeId})}" method="post">
                 <a class="btn btn-primary" th:href="@{/hoges/{hogeId}/edit(hogeId=${hoge.hogeId})}">編集</a>

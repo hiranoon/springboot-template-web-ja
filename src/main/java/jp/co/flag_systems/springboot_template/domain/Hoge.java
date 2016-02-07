@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import jp.co.flag_systems.springboot_template.common.constant.CodeConst;
+import jp.co.flag_systems.springboot_template.common.constant.CodeUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,12 +54,26 @@ public class Hoge {
     /**
      * {@link Fuga}.
      */
-    // LAZY  : 必要になったタイミングで Fuga の問い合わせを行います。
-    // EAGER : 予め Fuga の問い合わせを行っておきます。
+    // LAZY  : 必要になったタイミングで Fuga の問い合わせを行います.
+    // EAGER : 予め Fuga の問い合わせを行っておきます.
     // 問い合わせるタイミングの違いだけで、結合するか、キャッシュを利用するか、
-    // の違いはありません。
+    // の違いはありません.
     @ManyToOne(fetch = FetchType.LAZY)
     // 外部キー(結合元のカラム名) ※結合先のカラム名が異なる場合は referencedColumnName の指定も必要
     @JoinColumn(nullable = false, name = "fuga_id")
     private Fuga fuga;
+
+    // 一覧にコードの名称を出力したい場合などには、コード名称のメソッドを用意します.
+    // "get + コードのプロパティ名 + Name()" という命名にします。
+    // html(thymeleaf) 側では、
+    // <td th:text="${hoge.positionCodeName}">ゴールキーパー</td>
+    // のような形で参照することができます。
+    // コードIDからコード名称の変換には、 CodeUtil#getCodeName を利用します.
+    /**
+     * ポジションコードからポジション名称を取得して返却します.
+     * @return ポジション名称
+     */
+    public String getPositionCodeName() {
+        return CodeUtil.getCodeName(CodeConst.PositionCode.class, positionCode);
+    }
 }

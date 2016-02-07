@@ -85,8 +85,8 @@
           th:field="*{positionCode}">
           <option
             th:each="code : ${positionClasses}"
-            th:value="${code.codeId}"
-            th:text="${code.codeName}"
+            th:value="${code.id}"
+            th:text="${code.name}"
             th:classappend="${#fields.hasErrors('positionCode')}? 'form-control-danger'">FW</option>
         </select>
         <small class="text-danger"
