@@ -47,13 +47,7 @@ public class Hoge {
      * ポジションコード.
      */
     @Column(nullable = false)
-    private Integer positionCode;
-
-//    /**
-//     * 国籍.
-//     */
-//    @Column(nullable = false)
-//    private Integer fugaId;
+    private String positionCode;
 
     /**
      * {@link Fuga}.

@@ -2,7 +2,7 @@ CREATE TABLE hoges (
     hoge_id INT PRIMARY KEY AUTO_INCREMENT,
     squad_number INT,
     name VARCHAR(100),
-    position_code INT,
+    position_code VARCHAR(1),
     fuga_id INT
 );
 

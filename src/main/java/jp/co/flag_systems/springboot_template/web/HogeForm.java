@@ -33,10 +33,9 @@ public class HogeForm {
     /**
      * ポジションコード.
      */
-    @NotNull
-    @Min(1)
-    @Max(4)
-    private Integer positionCode;
+    @NotBlank // 空文字やスペースのみをエラーにします。
+    @Size(max = 1)
+    private String positionCode;
 
     /**
      * 国籍.
