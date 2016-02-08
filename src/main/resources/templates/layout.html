@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--
+    【解説】
+     $DECORATOR_TITLE は、 layout.html 側の <title> の値を指します.
+     $CONTENT_TITLE は、埋め込むページ側の <title> の値を指します.
+  -->
+  <title layout:title-pattern="$CONTENT_TITLE | $DECORATOR_TITLE">Spring Boot Template</title>
+  <!--
+    【解説】
+    そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われます.
+    th:href では、@{}でコンテクスト相対パスを絶対パスに置換しています.
+  -->
+  <link rel="stylesheet"
+    href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
+    th:href="@{/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css}">
+  <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    th:href="@{/webjars/font-awesome/4.5.0/css/font-awesome.min.css}">
+  <link rel="stylesheet" type="text/css"
+    href="../../static/css/style.css"
+    th:href="@{/css/style.css}">
+</head>
+<body>
+  <!--
+    【解説】
+    header を 取り込んでいます.
+    /common は、 /common.html を指します.(.html は省略可)
+    ::header は、 /common.html 内の th:fragment="header" として定義されている要素を指します.
+    取り込み方法は2種類あります.
+    th:include では、タグの中身だけが変わります. つまり、 th:fragment の子要素の取込になります.
+    th:replace では、タグそのものが置き換わります. つまり、 th:fragment 自身の要素も含めて取り込んでくれます.
+  -->
+  <nav th:replace="/common::header"></nav>
+
+  <!--
+    【解説】
+    各コンテンツ側で <div layout:fragment="content"></div> を定義します.
+    この中身が、下記のタグの中身にセットされます.
+  -->
+  <div layout:fragment="content">
+    <p>この内容は表示されません。各コンテンツで定義した内容に置き換わります。</p>
+  </div>
+
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+    th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+  <script
+    src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"
+    th:src="@{/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js}"></script>
+  <script
+    src="../../static/players.js"
+    th:src="@{/js/players.js}"></script>
+</body>
+</html>
