@@ -38,10 +38,10 @@ public class HogeForm {
     private String positionCode;
 
     /**
-     * 国籍.
+     * 国籍のID.
      */
     @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @Min(1)
     @Max(99)
-    private Integer fugaId;
+    private Integer nationalityId;
 }

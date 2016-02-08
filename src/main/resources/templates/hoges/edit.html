@@ -64,19 +64,19 @@
           th:errors="*{name}">error occurred !!</small>
       </fieldset>
       <fieldset class="form-group"
-        th:classappend="${#fields.hasErrors('fugaId')}? 'has-danger'">
-        <label for="fugaId" class="form-control-label">国籍</label>
+        th:classappend="${#fields.hasErrors('nationalityId')}? 'has-danger'">
+        <label for="nationalityId" class="form-control-label">国籍</label>
         <select class="form-control"
-          th:field="*{fugaId}">
+          th:field="*{nationalityId}">
           <option
             th:each="nationality : ${nationalities}"
-            th:value="${nationality.fugaId}"
+            th:value="${nationality.id}"
             th:text="${nationality.name}"
-            th:classappend="${#fields.hasErrors('fugaId')}? 'form-control-danger'">ドイツ</option>
+            th:classappend="${#fields.hasErrors('nationalityId')}? 'form-control-danger'">ドイツ</option>
         </select>
         <small class="text-danger"
-          th:if="${#fields.hasErrors('fugaId')}"
-          th:errors="*{fugaId}">error occurred !!</small>
+          th:if="${#fields.hasErrors('nationalityId')}"
+          th:errors="*{nationalityId}">error occurred !!</small>
       </fieldset>
       <fieldset class="form-group"
         th:classappend="${#fields.hasErrors('positionCode')}? 'has-danger'">

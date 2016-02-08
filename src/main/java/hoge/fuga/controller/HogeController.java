@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import hoge.fuga.common.constant.CodeConst;
-import hoge.fuga.domain.Fuga;
+import hoge.fuga.domain.Nationality;
 import hoge.fuga.domain.Hoge;
-import hoge.fuga.service.FugaService;
+import hoge.fuga.service.NationalityService;
 import hoge.fuga.service.HogeService;
 import hoge.fuga.web.HogeForm;
 
@@ -37,9 +37,9 @@ public class HogeController {
     @Autowired
     HogeService hogeService;
 
-    /** Fuga の Service クラス. */
+    /** 国籍の Service クラス. */
     @Autowired
-    FugaService fugaService;
+    NationalityService nationalityService;
 
     // @ModelAttribute があると @RequestMapping のメソッドの前に呼ばれます.
     // 返り値は自動で Model に追加されます.
@@ -83,10 +83,10 @@ public class HogeController {
      */
     @RequestMapping(value = "add", method = RequestMethod.GET)
     String add(Model model) {
-        // プルダウン用に Fuga を全件セットします.
-        List<Fuga> nationalities = fugaService.findAll();
+        // プルダウン用にすべての Nationality をセットします.
+        List<Nationality> nationalities = nationalityService.findAll();
         model.addAttribute("nationalities", nationalities);
-        // プルダウン用にポジションコードをセットします.
+        // プルダウン用にすべてのポジションコードをセットします.
         model.addAttribute("positionClasses", CodeConst.PositionCode.values());
         // Hoge の一覧画面を表示します.
         return "hoges/add";
@@ -112,7 +112,7 @@ public class HogeController {
         // エラーがないときはホゲを追加します.
         Hoge hoge = new Hoge();
         BeanUtils.copyProperties(form, hoge);
-        hogeService.create(hoge, form.getFugaId());
+        hogeService.create(hoge, form.getNationalityId());
         // Hoge の一覧画面にリダイレクトします.
         return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます.
     }
@@ -134,11 +134,11 @@ public class HogeController {
         Hoge hoge = hogeService.findOne(hogeId);
         // 検索結果を Form にコピーします.
         BeanUtils.copyProperties(hoge, form);
-        form.setFugaId(hoge.getFuga().getFugaId());
-        // プルダウン用に Fuga を全件セットします.
-        List<Fuga> nationalities = fugaService.findAll();
+        form.setNationalityId(hoge.getNationality().getId());
+        // プルダウン用にすべての Nationality をセットします.
+        List<Nationality> nationalities = nationalityService.findAll();
         model.addAttribute("nationalities", nationalities);
-        // プルダウン用にポジションコードをセットします.
+        // プルダウン用にすべてのポジションコードをセットします.
         model.addAttribute("positionClasses", CodeConst.PositionCode.values());
         // 更新画面を表示します.
         return "hoges/edit";
@@ -169,7 +169,7 @@ public class HogeController {
         hoge.setHogeId(hogeId);
         // Hoge を更新します.
 // TODO 楽観的排他制御
-        hogeService.update(hoge, form.getFugaId());
+        hogeService.update(hoge, form.getNationalityId());
         // Hoge の一覧画面にリダイレクトします.
         return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます.
     }

@@ -8,7 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import hoge.fuga.domain.Hoge;
-import hoge.fuga.repository.FugaRepository;
+import hoge.fuga.domain.Nationality;
+import hoge.fuga.repository.NationalityRepository;
 import hoge.fuga.repository.HogeRepository;
 
 /**
@@ -22,9 +23,9 @@ public class HogeService {
     @Autowired
     HogeRepository hogeRepository;
 
-    /** Fuga の Repository クラス */
+    /** {@link Nationality} の Repository クラス */
     @Autowired
-    FugaRepository fugaRepository;
+    NationalityRepository nationarityRepository;
 
     /**
      * Hoge をページング指定条件にしたがって検索します.
@@ -47,22 +48,22 @@ public class HogeService {
     /**
      * Hoge を作成します.
      * @param hoge Hoge の Domain クラス
-     * @param fugaId Fuga の ID
+     * @param nationarityId 国籍ID
      * @return 作成した Hoge の Domain クラス
      */
-    public Hoge create(Hoge hoge, Integer fugaId) {
-        hoge.setFuga(fugaRepository.findOne(fugaId));
+    public Hoge create(Hoge hoge, Integer nationarityId) {
+        hoge.setNationality(nationarityRepository.findOne(nationarityId));
         return hogeRepository.save(hoge);
     }
 
     /**
      * Hoge を更新します.
      * @param hoge Hoge の Domain クラス
-     * @param fugaId Fuga の ID
+     * @param nationarityId 国籍ID
      * @return 更新した Hoge の Domain クラス
      */
-    public Hoge update(Hoge hoge, Integer fugaId) {
-        hoge.setFuga(fugaRepository.findOne(fugaId));
+    public Hoge update(Hoge hoge, Integer nationarityId) {
+        hoge.setNationality(nationarityRepository.findOne(nationarityId));
         return hogeRepository.save(hoge);
     }
 

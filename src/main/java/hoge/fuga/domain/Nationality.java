@@ -11,26 +11,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * fugas テーブルの Domain クラス.
- * このサンプルプログラムでは、国籍のデータを表します.
+ * 国籍(nationalities)テーブルの Domain クラス.
  * @author hirano
  */
 @Entity
-@Table(name = "fugas")
+@Table(name = "nationalities")
 //TODO リクエスト毎ではなくアプリケーションスコープでキャッシュできないか？
 @Cacheable // キャッシュを有効にする
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Fuga {
+public class Nationality {
     /**
      * ID.
      */
     @Id
-    private Integer fugaId;
+    private Integer id;
 
     /**
-     * 名前.
+     * 名称.
      */
     @Column(nullable = false)
     private String name;

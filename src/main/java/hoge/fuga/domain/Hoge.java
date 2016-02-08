@@ -52,16 +52,16 @@ public class Hoge {
     private String positionCode;
 
     /**
-     * {@link Fuga}.
+     * {@link Nationality}.
      */
-    // LAZY  : 必要になったタイミングで Fuga の問い合わせを行います.
-    // EAGER : 予め Fuga の問い合わせを行っておきます.
+    // LAZY  : 必要になったタイミングで Nationality の問い合わせを行います.
+    // EAGER : 予め Nationality の問い合わせを行っておきます.
     // 問い合わせるタイミングの違いだけで、結合するか、キャッシュを利用するか、
     // の違いはありません.
     @ManyToOne(fetch = FetchType.LAZY)
     // 外部キー(結合元のカラム名) ※結合先のカラム名が異なる場合は referencedColumnName の指定も必要
-    @JoinColumn(nullable = false, name = "fuga_id")
-    private Fuga fuga;
+    @JoinColumn(nullable = false, name = "nationality_id")
+    private Nationality nationality;
 
     // 一覧にコードの名称を出力したい場合などには、コード名称のメソッドを用意します.
     // "get + コードのプロパティ名 + Name()" という命名にします.
