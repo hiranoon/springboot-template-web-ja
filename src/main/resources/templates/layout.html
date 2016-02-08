@@ -32,13 +32,13 @@
   <!--
     【解説】
     header を 取り込んでいます.
-    /fragments は、 /fragments.html を指します.(.html は省略可)
-    ::header は、 /fragments.html 内の th:fragment="header" として定義されている要素を指します.
+    fragments は、 fragments.html を指します.(.html は省略可)
+    ::header は、 fragments.html 内の th:fragment="header" として定義されている要素を指します.
     取り込み方法は2種類あります.
     th:include では、タグの中身だけが変わります. つまり、 th:fragment の子要素の取込になります.
     th:replace では、タグそのものが置き換わります. つまり、 th:fragment 自身の要素も含めて取り込んでくれます.
   -->
-  <nav th:replace="/fragments::header"></nav>
+  <nav th:replace="fragments::header"></nav>
 
   <!--
     【解説】
