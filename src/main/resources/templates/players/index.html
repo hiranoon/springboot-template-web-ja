@@ -23,9 +23,17 @@
     <h2>選手一覧</h2>
 
     <!-- 操作部 -->
-    <div class="container m-b-1">
-      <!-- @{}でコンテクスト相対パスを絶対パスに置換できます -->
-      <a th:href="@{/players/add}" class="btn btn-primary">追加</a>
+    <div class="row m-y-1">
+      <div class="input-group col-xs-5">
+        <input type="text" class="form-control" placeholder="選手の名前を入力してください。">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="button">検索</button>
+        </span>
+      </div>
+      <div class="col-xs-2">
+        <!-- 【解説】 @{}でコンテクスト相対パスを絶対パスに置換できます -->
+        <a th:href="@{/players/add}" class="btn btn-primary">選手追加</a>
+      </div>
     </div>
 
     <!-- 一覧部 -->
