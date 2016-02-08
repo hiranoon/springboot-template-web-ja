@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja"
   xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="UTF-8" />
@@ -12,12 +13,8 @@
     そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われます.
     th:href では、@{}でコンテクスト相対パスを絶対パスに置換しています.
   -->
-  <link rel="stylesheet"
-    href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
-    th:href="@{/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css}">
-  <link rel="stylesheet" type="text/css"
-    href="../../static/css/style.css"
-    th:href="@{/css/style.css}">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../../static/css/style.css">
 </head>
 <body>
   <!-- fragments of header
@@ -39,11 +36,7 @@
     </div><!-- /.container -->
   </nav><!-- /.navbar -->
 
-  <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
-    th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-  <script
-    src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"
-    th:src="@{/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
 </body>
 </html>
