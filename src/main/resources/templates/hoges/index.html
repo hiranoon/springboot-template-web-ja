@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>ホゲ一覧</title>
-  <!-- そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われる。-->
-  <!-- th:href では、@{}でコンテクスト相対パスを絶対パスに置換している。 -->
+  <!-- そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われます. -->
+  <!-- th:href では、@{}でコンテクスト相対パスを絶対パスに置換しています. -->
   <link rel="stylesheet"
     href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
     th:href="@{/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css}">
@@ -30,7 +30,7 @@
       </ul>
 <!--
   <p>
-    <span sec:authentication="principal.user.username">duke</span>さんログイン中。
+    <span sec:authentication="principal.user.username">duke</span>さんログイン中.
     <a th:href="@{/logout}">ログアウト</a>
   </p>
  -->
@@ -50,8 +50,8 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <!-- switch で分岐しています。 -->
-            <!-- page.sort.getOrderFor('プロパティ名').ascending で昇順であるか判定ができます。 -->
+            <!-- ソートの昇順降順の切り替えは switch で分岐しています. -->
+            <!-- page.sort.getOrderFor('プロパティ名').ascending で昇順であるか判定ができます. -->
             <th th:switch="${page.sort.getOrderFor('squadNumber').ascending}">
               <a th:case="true" th:href="@{/hoges(sort='squadNumber,desc')}">背番号 <i class="fa fa-caret-down"></i></a>
               <a th:case="*"    th:href="@{/hoges(sort='squadNumber,asc')}">背番号 <i class="fa fa-caret-up"></i></a>
@@ -80,7 +80,7 @@
       </table>
     </div><!-- /.table-responsive -->
 
-<!-- 以下の要素を使ってページングの分岐を行っています。
+<!-- 以下の要素を使ってページングの分岐を行っています.
     <ul>
       <li>Page が持つ値</li>
       <li>全ページ数<span th:text="${page.totalPages}">?</span></li>

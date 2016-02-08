@@ -18,7 +18,7 @@ public class HogeForm {
     /**
      * 背番号.
      */
-    @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています。
+    @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @Min(1)
     @Max(99)
     private Integer squadNumber;
@@ -26,21 +26,21 @@ public class HogeForm {
     /**
      * 名前.
      */
-    @NotBlank // 空文字やスペースのみをエラーにします。
+    @NotBlank // 空文字やスペースのみをエラーにします.
     @Size(min = 1, max = 50)
     private String name;
 
     /**
      * ポジションコード.
      */
-    @NotBlank // 空文字やスペースのみをエラーにします。
+    @NotBlank // 空文字やスペースのみをエラーにします.
     @Size(max = 1)
     private String positionCode;
 
     /**
      * 国籍.
      */
-    @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています。
+    @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @Min(1)
     @Max(99)
     private Integer fugaId;

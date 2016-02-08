@@ -41,10 +41,10 @@ public class HogeController {
     @Autowired
     FugaService fugaService;
 
-    // @ModelAttribute があると @RequestMapping のメソッドの前に呼ばれます。
-    // 返り値は自動で Model に追加されます。
-    // model.addAttribute(new HogeForm); が裏で実行されることを意味します。
-    // 属性名を省略すると先頭小文字のキャメルケースになるので、「hogeForm」として登録されます。
+    // @ModelAttribute があると @RequestMapping のメソッドの前に呼ばれます.
+    // 返り値は自動で Model に追加されます.
+    // model.addAttribute(new HogeForm); が裏で実行されることを意味します.
+    // 属性名を省略すると先頭小文字のキャメルケースになるので、「hogeForm」として登録されます.
     /**
      * Form の初期化を行います.
      * @return {@link HogeForm} オブジェクト
@@ -101,20 +101,20 @@ public class HogeController {
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
     String create(
-            @Validated HogeForm form, // 入力チェックを行います。結果は BindingResult に入ります。
-            BindingResult result,
+            @Validated HogeForm form, // 入力チェックを行います. 結果は BindingResult に入ります.
+            BindingResult result,     // 入力チェク結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             Model model
             ) {
-        // エラーが有るときは登録画面に戻ります。
+        // エラーが有るときは登録画面に戻ります.
         if (result.hasErrors()) {
             return add(model);
         }
-        // エラーがないときはホゲを追加します。
+        // エラーがないときはホゲを追加します.
         Hoge hoge = new Hoge();
         BeanUtils.copyProperties(form, hoge);
         hogeService.create(hoge, form.getFugaId());
-        // Hoge の一覧画面にリダイレクトします。
-        return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます。
+        // Hoge の一覧画面にリダイレクトします.
+        return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます.
     }
 
     /**
@@ -126,13 +126,13 @@ public class HogeController {
      */
     @RequestMapping(value = "{hogeId}/edit", method = RequestMethod.GET)
     String edit(
-            @PathVariable("hogeId") Integer hogeId,
+            @PathVariable("hogeId") Integer hogeId, // パスパラメータは @PathVariable で取得できます.
             HogeForm form,
             Model model
             ) {
-        // パスパラメータの ID よりホゲを検索します。
+        // パスパラメータの ID よりホゲを検索します.
         Hoge hoge = hogeService.findOne(hogeId);
-        // 検索結果を Form にコピーします。
+        // 検索結果を Form にコピーします.
         BeanUtils.copyProperties(hoge, form);
         form.setFugaId(hoge.getFuga().getFugaId());
         // プルダウン用に Fuga を全件セットします.
@@ -140,7 +140,7 @@ public class HogeController {
         model.addAttribute("nationalities", nationalities);
         // プルダウン用にポジションコードをセットします.
         model.addAttribute("positionClasses", CodeConst.PositionCode.values());
-        // 更新画面を表示します。
+        // 更新画面を表示します.
         return "hoges/edit";
     }
 
@@ -159,19 +159,19 @@ public class HogeController {
             BindingResult result,
             Model model
             ) {
-        // エラーが有るときは更新画面に戻ります。
+        // エラーが有るときは更新画面に戻ります.
         if (result.hasErrors()) {
             return edit(hogeId, form, model);
         }
-        // Form より Hoge オブジェクトを生成します。
+        // Form より Hoge オブジェクトを生成します.
         Hoge hoge = new Hoge();
         BeanUtils.copyProperties(form, hoge);
         hoge.setHogeId(hogeId);
-        // Hoge を更新します。
+        // Hoge を更新します.
 // TODO 楽観的排他制御
         hogeService.update(hoge, form.getFugaId());
-        // Hoge の一覧画面にリダイレクトします。
-        return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます。
+        // Hoge の一覧画面にリダイレクトします.
+        return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます.
     }
 
     /**
@@ -181,10 +181,10 @@ public class HogeController {
      */
     @RequestMapping(value = "{hogeId}/destroy", method = RequestMethod.POST)
     String destroy(@PathVariable("hogeId") Integer hogeId) {
-        // Hoge を削除します。
+        // Hoge を削除します.
 // TODO 楽観的排他制御
         hogeService.delete(hogeId);
-        // Hoge の一覧画面にリダイレクトします。
-        return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます。
+        // Hoge の一覧画面にリダイレクトします.
+        return "redirect:/hoges"; // リダイレクトをする場合は先頭に「redirect:」を付けます.
     }
 }

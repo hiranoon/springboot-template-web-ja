@@ -64,10 +64,10 @@ public class Hoge {
     private Fuga fuga;
 
     // 一覧にコードの名称を出力したい場合などには、コード名称のメソッドを用意します.
-    // "get + コードのプロパティ名 + Name()" という命名にします。
+    // "get + コードのプロパティ名 + Name()" という命名にします.
     // html(thymeleaf) 側では、
     // <td th:text="${hoge.positionCodeName}">ゴールキーパー</td>
-    // のような形で参照することができます。
+    // のような形で参照することができます.
     // コードIDからコード名称の変換には、 CodeUtil#getCodeName を利用します.
     /**
      * ポジションコードからポジション名称を取得して返却します.
