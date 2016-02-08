@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "nationalities")
 //TODO リクエスト毎ではなくアプリケーションスコープでキャッシュできないか？
-@Cacheable // キャッシュを有効にする
+@Cacheable // 【解説】二次キャッシュを有効にします.
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

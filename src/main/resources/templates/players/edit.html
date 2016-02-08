@@ -7,8 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>選手更新 | Spring Boot Template</title>
-  <!-- そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われます. -->
-  <!-- th:href では、@{}でコンテクスト相対パスを絶対パスに置換しています. -->
+  <!--
+    【解説】
+    そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われます.
+    th:href では、@{}でコンテクスト相対パスを絶対パスに置換しています.
+  -->
   <link rel="stylesheet"
     href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
     th:href="@{/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css}">
@@ -36,9 +39,9 @@
 
   <div class="container">
     <h2>選手更新</h2>
-    <!-- th:object="${playerForm}" で、playerForm を指定しておくと、子要素の中で playerForm.xxx と書かずに済みます -->
+    <!-- 【解説】th:object="${playerForm}" で、playerForm を指定しておくと、子要素の中で playerForm.xxx と書かずに済みます -->
     <form th:action="@{/players/update}" th:object="${playerForm}" method="post">
-      <!-- th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->
+      <!-- 【解説】th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->
       <fieldset class="form-group"
         th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'">
         <label for="squadNumber" class="form-control-label">背番号</label>

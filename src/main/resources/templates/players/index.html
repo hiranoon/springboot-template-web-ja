@@ -7,8 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>選手一覧 | Spring Boot Template</title>
-  <!-- そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われます. -->
-  <!-- th:href では、@{}でコンテクスト相対パスを絶対パスに置換しています. -->
+  <!--
+    【解説】
+    そのままブラウザで見た時は href が使われ、 thymeleaf 経由だと th:href が使われます.
+    th:href では、@{}でコンテクスト相対パスを絶対パスに置換しています.
+  -->
   <link rel="stylesheet"
     href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css"
     th:href="@{/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css}">
@@ -50,8 +53,11 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <!-- ソートの昇順降順の切り替えは switch で分岐しています. -->
-            <!-- page.sort.getOrderFor('プロパティ名').ascending で昇順であるか判定ができます. -->
+            <!--
+              【解説】
+              ソートの昇順降順の切り替えは switch で分岐しています.
+              page.sort.getOrderFor('プロパティ名').ascending で昇順であるか判定ができます.
+            -->
             <th th:switch="${page.sort.getOrderFor('squadNumber').ascending}">
               <a th:case="true" th:href="@{/players(sort='squadNumber,desc')}">背番号 <i class="fa fa-caret-down"></i></a>
               <a th:case="*"    th:href="@{/players(sort='squadNumber,asc')}">背番号 <i class="fa fa-caret-up"></i></a>
@@ -63,12 +69,18 @@
           </tr>
         </thead>
         <tbody>
+          <!-- 【解説】親要素で th:each を使うことで子要素が繰り返されます. -->
           <tr th:each="player : ${page}">
             <td th:text="${player.squadNumber}">10</td>
             <td th:text="${player.name}">山田太郎</td>
             <td th:text="${player.nationality.name}">トリニダード・トバゴ</td>
             <td th:text="${player.positionCodeName}">ゴールキーパー</td>
             <td>
+              <!--
+                【解説】
+                パスパラメータは {} で表現します.
+                パラメータにセットする値はパスの最後に () で指定できます.
+              -->
               <form th:action="@{/players/{id}/destroy(id=${player.id})}" method="post">
                 <a class="btn btn-primary" th:href="@{/players/{id}/edit(id=${player.id})}">編集</a>
                 <a class="btn btn-danger" data-toggle="modal" data-target="#destroyConfirmModal" th:attr="data-id=${player.id}">削除</a>

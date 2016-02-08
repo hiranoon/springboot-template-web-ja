@@ -16,31 +16,29 @@ import lombok.Data;
 @Data
 public class PlayerForm {
     /**
-     * 背番号.
+     * ID.
+     * 更新時には指定されます. 登録時には指定されません.
      */
-    @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています.
+    private Integer id;
+
+    /** 背番号. */
+    @NotNull // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @Min(1)
     @Max(99)
     private Integer squadNumber;
 
-    /**
-     * 名前.
-     */
-    @NotBlank // 空文字やスペースのみをエラーにします.
+    /** 名前. */
+    @NotBlank // 【解説】空文字やスペースのみをエラーにします.
     @Size(min = 1, max = 50)
     private String name;
 
-    /**
-     * ポジションコード.
-     */
-    @NotBlank // 空文字やスペースのみをエラーにします.
+    /** ポジションコード. */
+    @NotBlank // 【解説】空文字やスペースのみをエラーにします.
     @Size(max = 1)
     private String positionCode;
 
-    /**
-     * 国籍のID.
-     */
-    @NotNull // 必須チェックではなく、リクエストパラメータに存在するかチェックしています.
+    /** 国籍のID. */
+    @NotNull // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @Min(1)
     @Max(99)
     private Integer nationalityId;

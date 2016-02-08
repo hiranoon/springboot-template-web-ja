@@ -27,6 +27,7 @@ public class DatabaseConfig {
     @Bean
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() {
+        // 【解説】
         // 環境変数 JDBC_DATABASE_URL は、Heroku で定義されています.
         // 以下の様な形式です.
         // jdbc:mysql://<host>:<port>/<dbname>?user=<username>&password=<password>

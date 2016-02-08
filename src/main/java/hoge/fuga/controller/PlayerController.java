@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import hoge.fuga.common.constant.CodeConsts;
 import hoge.fuga.domain.Nationality;
@@ -153,7 +152,6 @@ public class PlayerController {
 
     /**
      * 選手を更新します.
-     * @param id リクエストパラメータ（hidden）の id
      * @param form 画面入力内容
      * @param result 入力チェック結果
      * @param model {@link Model} オブジェクト
@@ -161,19 +159,17 @@ public class PlayerController {
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
     String update(
-            @RequestParam Integer id,
             @Validated PlayerForm form, // 【解説】@Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
             BindingResult result,       // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             Model model
             ) {
         // エラーが有るときは更新画面に戻ります.
         if (result.hasErrors()) {
-            return edit(id, form, model);
+            return edit(form.getId(), form, model);
         }
         // Form より Player オブジェクトを生成します.
         Player player = new Player();
         BeanUtils.copyProperties(form, player);
-        player.setId(id);
         // 選手を更新します.
 // TODO 楽観的排他制御
         playerService.update(player, form.getNationalityId());

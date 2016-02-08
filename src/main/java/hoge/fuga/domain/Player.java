@@ -43,17 +43,22 @@ public class Player {
     private String positionCode;
 
     /** 国籍. */
+    // 【解説】
+    // FetchType には以下の2種類があります.
     // LAZY  : 必要になったタイミングで Nationality の問い合わせを行います.
     // EAGER : 予め Nationality の問い合わせを行っておきます.
     // 問い合わせるタイミングの違いだけで、結合するか、キャッシュを利用するか、の違いはありません.
     @ManyToOne(fetch = FetchType.LAZY)
-    // 外部キー(結合元のカラム名) ※結合先のカラム名が異なる場合は referencedColumnName の指定も必要
+    // 【解説】
+    // 外部キー(結合元のカラム名)を指定しています.
     @JoinColumn(nullable = false, name = "nationality_id")
     private Nationality nationality;
 
-    // 一覧にコードの名称を出力したい場合などには、コード名称のメソッドを用意します.
+    // 【解説】
+    // 当該プロジェクトでは、 CodeConsts に定義されたコードの名称を取得するには以下のように行います.
+    // Domain クラス(当該クラス)のプロパティはコードIDを保持し、コード名称を取得するメソッドを別途用意します.
     // "get + コードのプロパティ名 + Name()" という命名にします.
-    // html(thymeleaf) 側では、
+    // getter ですので、 html(thymeleaf) 側では、
     // <td th:text="${player.positionCodeName}">ゴールキーパー</td>
     // のような形で参照することができます.
     // コードIDからコード名称の変換には、 CodeUtils#getCodeName を利用します.
