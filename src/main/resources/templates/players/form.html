@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>※フォーム部品 | Spring Boot Template</title>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>※フォーム部品</h2>
+    <!--
+      【解説】
+      th:object="${playerForm}" で、playerForm を選択しておくと、子要素の中で playerForm.xxx と書かずに済みます.
+      th:object で選択したものは、子要素で *{} で指定できます.
+      親要素 th:object なし + 子要素 ${playerForm.name} = 親要素 th:object="${playerForm}" + 子要素 *{name}
+    -->
+    <form th:action="@{/players/create}" th:object="${playerForm}" method="post" th:fragment="form">
+
+      <!-- fragments of "formContents"
+      ================================================== -->
+      <div th:fragment="formContents">
+        <!-- 【解説】th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->
+        <fieldset class="form-group"
+          th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'">
+          <label for="squadNumber" class="form-control-label">背番号</label>
+          <input type="text" class="form-control"
+            id="squadNumber"
+            name="squadNumber"
+            th:field="*{squadNumber}"
+            th:classappend="${#fields.hasErrors('squadNumber')}? 'form-control-danger'">
+          <small class="text-danger"
+            th:if="${#fields.hasErrors('squadNumber')}"
+            th:errors="*{squadNumber}">error occurred !!</small>
+        </fieldset>
+        <fieldset class="form-group"
+          th:classappend="${#fields.hasErrors('name')}? 'has-danger'">
+          <label for="name" class="form-control-label">名前</label>
+          <input type="text" class="form-control"
+            id="name"
+            name="name"
+            th:field="*{name}"
+            th:classappend="${#fields.hasErrors('name')}? 'form-control-danger'">
+          <small class="text-danger"
+            th:if="${#fields.hasErrors('name')}"
+            th:errors="*{name}">error occurred !!</small>
+        </fieldset>
+        <fieldset class="form-group"
+          th:classappend="${#fields.hasErrors('nationalityId')}? 'has-danger'">
+          <label for="nationalityId" class="form-control-label">国籍</label>
+          <select class="form-control"
+            th:field="*{nationalityId}">
+            <option
+              th:each="nationality : ${nationalities}"
+              th:value="${nationality.id}"
+              th:text="${nationality.name}"
+              th:classappend="${#fields.hasErrors('nationalityId')}? 'form-control-danger'">ドイツ</option>
+          </select>
+          <small class="text-danger"
+            th:if="${#fields.hasErrors('nationalityId')}"
+            th:errors="*{nationalityId}">error occurred !!</small>
+        </fieldset>
+        <fieldset class="form-group"
+          th:classappend="${#fields.hasErrors('positionCode')}? 'has-danger'">
+          <label for="positionCode" class="form-control-label">ポジション</label>
+          <select class="form-control"
+            th:field="*{positionCode}">
+            <option
+              th:each="code : ${positionClasses}"
+              th:value="${code.id}"
+              th:text="${code.name}"
+              th:classappend="${#fields.hasErrors('positionCode')}? 'form-control-danger'">FW</option>
+          </select>
+          <small class="text-danger"
+            th:if="${#fields.hasErrors('positionCode')}"
+            th:errors="*{positionCode}">error occurred !!</small>
+        </fieldset>
+      </div>
+
+      <a th:href="@{/players}" class="btn btn-secondary">戻る</a>
+      <button type="submit" class="btn btn-primary">追加</button>
+    </form>
+  </div><!-- /.container -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+</body>
+</html>

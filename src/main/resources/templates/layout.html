@@ -59,7 +59,11 @@
     【解説】
     各コンテンツごとに追加で JavaScript を利用する為の定義です.
     コンテンツ側では、
-    <div layout:fragment="additionalScripts"><script ...></script><script ...></script>...</div>
+    <div layout:fragment="additionalScripts">
+      <script ...></script>
+      <script ...></script>
+      ...
+    </div>
     のように、 <script> タグを追記します.
     th:remove="tag" により、最終的には <div> が消え、 <script> だけが残ります.
     参考) http://huruyosi.hatenablog.com/entry/2015/08/02/012646

@@ -28,61 +28,9 @@
       親要素 th:object なし + 子要素 ${playerForm.name} = 親要素 th:object="${playerForm}" + 子要素 *{name}
     -->
     <form th:action="@{/players/update}" th:object="${playerForm}" method="post">
-      <!-- 【解説】th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->
-      <fieldset class="form-group"
-        th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'">
-        <label for="squadNumber" class="form-control-label">背番号</label>
-        <input type="text" class="form-control"
-          id="squadNumber"
-          name="squadNumber"
-          th:field="*{squadNumber}"
-          th:classappend="${#fields.hasErrors('squadNumber')}? 'form-control-danger'">
-        <small class="text-danger"
-          th:if="${#fields.hasErrors('squadNumber')}"
-          th:errors="*{squadNumber}">error occurred !!</small>
-      </fieldset>
-      <fieldset class="form-group"
-        th:classappend="${#fields.hasErrors('name')}? 'has-danger'">
-        <label for="name" class="form-control-label">名前</label>
-        <input type="text" class="form-control"
-          id="name"
-          name="name"
-          th:field="*{name}"
-          th:classappend="${#fields.hasErrors('name')}? 'form-control-danger'">
-        <small class="text-danger"
-          th:if="${#fields.hasErrors('name')}"
-          th:errors="*{name}">error occurred !!</small>
-      </fieldset>
-      <fieldset class="form-group"
-        th:classappend="${#fields.hasErrors('nationalityId')}? 'has-danger'">
-        <label for="nationalityId" class="form-control-label">国籍</label>
-        <select class="form-control"
-          th:field="*{nationalityId}">
-          <option
-            th:each="nationality : ${nationalities}"
-            th:value="${nationality.id}"
-            th:text="${nationality.name}"
-            th:classappend="${#fields.hasErrors('nationalityId')}? 'form-control-danger'">ドイツ</option>
-        </select>
-        <small class="text-danger"
-          th:if="${#fields.hasErrors('nationalityId')}"
-          th:errors="*{nationalityId}">error occurred !!</small>
-      </fieldset>
-      <fieldset class="form-group"
-        th:classappend="${#fields.hasErrors('positionCode')}? 'has-danger'">
-        <label for="positionCode" class="form-control-label">ポジション</label>
-        <select class="form-control"
-          th:field="*{positionCode}">
-          <option
-            th:each="code : ${positionClasses}"
-            th:value="${code.id}"
-            th:text="${code.name}"
-            th:classappend="${#fields.hasErrors('positionCode')}? 'form-control-danger'">FW</option>
-        </select>
-        <small class="text-danger"
-          th:if="${#fields.hasErrors('positionCode')}"
-          th:errors="*{positionCode}">error occurred !!</small>
-      </fieldset>
+      <!-- フォーム部 -->
+      <div th:replace="/players/form::formContents"></div>
+      <!-- フォーム操作部 -->
       <a th:href="@{/players}" class="btn btn-secondary">戻る</a>
       <input type="hidden" name="id" th:value="${id}">
       <button type="submit" class="btn btn-primary">更新</button>

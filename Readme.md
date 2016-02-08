@@ -51,6 +51,10 @@ layout.html を用意し、`<head>` の中身やヘッダー部品の取込な�
   layout:decorator="layout"> <!-- ←ここ！ -->
 ```
 
+画面の部品は fragments.html に集約しています。
+この中に、 `<nav th:fragment="pagenation(path)">...</nav>` のように部品が定義されています。
+
+
 
 
 
