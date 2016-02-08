@@ -73,7 +73,12 @@
     </div><!-- /.table-responsive -->
 
     <!-- ページング部 -->
-    <nav th:replace="/fragments::pagenation(path='/players')"></nav>
+    <div class="pull-left">
+      <div th:replace="/fragments::paginationInfo"></div>
+    </div>
+    <div class="pull-right">
+      <nav th:replace="/fragments::pagenation(path='/players')"></nav>
+    </div>
 
     <!-- 削除確認ダイアログ -->
     <div th:replace="/fragments::confirmModal(id='destroyConfirmModal', label='削除')"></div>

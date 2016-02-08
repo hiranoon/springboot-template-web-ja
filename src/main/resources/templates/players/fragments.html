@@ -23,7 +23,9 @@
     -->
     <form th:action="@{/players/create}" th:object="${playerForm}" method="post" th:fragment="form">
 
-      <!-- fragments of "form"
+      <!--
+      ==================================================
+      fragments of "form"
       ================================================== -->
       <div th:fragment="form">
         <!-- 【解説】th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->

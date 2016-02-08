@@ -13,7 +13,9 @@
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-  <!-- fragments of "header"
+  <!--
+  ==================================================
+  fragments of "header"
   ================================================== -->
   <nav class="navbar navbar-fixed-top navbar-light bg-faded" th:fragment="header">
     <div class="container">
@@ -40,7 +42,21 @@
 
   <div class="container">
 
-    <!-- fragments of "pagenation"
+    <!--
+    ==================================================
+    fragments of "paginationInfo"
+    ================================================== -->
+    <div class="pagination-info" th:fragment="paginationInfo">
+      <span th:text="${(page.number * page.size) + 1}">1</span>
+      <span> - </span>
+      <span th:text="${page.isLast() ? (page.totalElements) : ((page.number + 1) * page.size)}">5</span>
+      <span> / </span>
+      全 <span th:text="${page.totalElements}">1,234</span> 件
+    </div>
+
+    <!--
+    ==================================================
+    fragments of "pagenation"
     @param path ページングさせる一覧画面のパス. `/players` のように指定します.
     ================================================== -->
     <nav th:fragment="pagenation(path)">
@@ -115,7 +131,9 @@
       </ul>
     </nav>
 
-    <!-- fragments of "confirmModal"
+    <!--
+    ==================================================
+    fragments of "confirmModal"
     @param id 当該モーダルの id. aria-labelledby や submit ボタンの id にも使われます.
     @param label 確認文言、ボタン名称に使うラベル.
     ================================================== -->
