@@ -1,5 +1,5 @@
-create table hoges (
-    hoge_id int primary key auto_increment,
+create table players (
+    id int primary key auto_increment,
     squad_number int,
     name varchar(100),
     position_code varchar(1),

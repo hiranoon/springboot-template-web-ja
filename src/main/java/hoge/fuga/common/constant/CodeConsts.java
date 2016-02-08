@@ -14,12 +14,12 @@ import lombok.Getter;
  * これらが実装されていることを前提として、ユーティリティクラス等の機能が実装されています.
  * @author hirano
  */
-public class CodeConst {
+public class CodeConsts {
 
     /**
      * 隠蔽されたコンストラクタ.
      */
-    private CodeConst() {
+    private CodeConsts() {
     }
 
     /** ポジションコード */

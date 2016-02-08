@@ -22,15 +22,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Nationality {
-    /**
-     * ID.
-     */
+    /** ID. */
     @Id
     private Integer id;
 
-    /**
-     * 名称.
-     */
+    /** 名称. */
     @Column(nullable = false)
     private String name;
 }

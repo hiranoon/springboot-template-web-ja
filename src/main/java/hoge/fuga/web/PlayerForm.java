@@ -10,11 +10,11 @@ import org.hibernate.validator.constraints.NotBlank;
 import lombok.Data;
 
 /**
- * Hoge の Form クラス.
+ * 選手の Form クラス.
  * @author hirano
  */
 @Data
-public class HogeForm {
+public class PlayerForm {
     /**
      * 背番号.
      */
