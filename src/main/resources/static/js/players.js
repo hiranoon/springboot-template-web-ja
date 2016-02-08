@@ -9,7 +9,7 @@ $(function() {
     })
 
     // イベントの登録
-    $('#destroySubmitTrigger').one('click', function(){
+    $('#destroyConfirmModalSubmitTrigger').one('click', function(){
         $('#destroySubmit_' + currentId).trigger('click'); // 非表示のsubmitボタンをクリックする
     });
 });

@@ -29,7 +29,7 @@
     -->
     <form th:action="@{/players/update}" th:object="${playerForm}" method="post">
       <!-- フォーム部 -->
-      <div th:replace="/players/form::formContents"></div>
+      <div th:replace="/players/fragments::form"></div>
       <!-- フォーム操作部 -->
       <a th:href="@{/players}" class="btn btn-secondary">戻る</a>
       <input type="hidden" name="id" th:value="${id}">

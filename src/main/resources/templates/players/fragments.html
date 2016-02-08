@@ -23,9 +23,9 @@
     -->
     <form th:action="@{/players/create}" th:object="${playerForm}" method="post" th:fragment="form">
 
-      <!-- fragments of "formContents"
+      <!-- fragments of "form"
       ================================================== -->
-      <div th:fragment="formContents">
+      <div th:fragment="form">
         <!-- 【解説】th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->
         <fieldset class="form-group"
           th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'">

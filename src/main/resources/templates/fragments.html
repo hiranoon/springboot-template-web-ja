@@ -109,6 +109,29 @@
       </ul>
     </nav>
 
+    <!-- fragments of "confirmModal"
+    @param id 当該モーダルの id. aria-labelledby や submit ボタンの id にも使われます.
+    @param label 確認文言、ボタン名称に使うラベル.
+    ================================================== -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+      th:id="${id}"
+      th:attr="aria-labelledby=${id + 'Label'}"
+      th:fragment="confirmModal(id, label)">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p><span th:text="${label}">更新</span>します。よろしいですか？</p>
+          </div><!-- /.modal-body -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+            <button type="submit" class="btn btn-danger"
+              th:id="${id + 'SubmitTrigger'}"
+              th:text="${label}">更新</button>
+          </div><!-- /.modal-footer -->
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
   </div><!-- /.container -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

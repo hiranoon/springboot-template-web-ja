@@ -76,27 +76,15 @@
     <nav th:replace="/fragments::pagenation(path='/players')"></nav>
 
     <!-- 削除確認ダイアログ -->
-    <div class="modal fade" id="destroyConfirmModal" tabindex="-1" role="dialog" aria-labelledby="destroyConfirmModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-            <p>削除します。よろしいですか？</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-danger" id="destroySubmitTrigger">削除</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    <div th:replace="/fragments::confirmModal(id='destroyConfirmModal', label='削除')"></div>
 
   </div><!-- /.container -->
 
   <!-- 追加スクリプト -->
   <div layout:fragment="additionalScripts">
     <script
-    src="../../static/players.js"
-    th:src="@{/js/players.js}"></script>
+      src="../../static/players.js"
+      th:src="@{/js/players.js}"></script>
   </div>
 </body>
 </html>
