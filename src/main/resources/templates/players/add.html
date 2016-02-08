@@ -29,7 +29,7 @@
     -->
     <form th:action="@{/players/create}" th:object="${playerForm}" method="post">
       <!-- フォーム部 -->
-      <div th:replace="/players/fragments::form"></div>
+      <div th:replace="/players/fragments::formContents"></div>
       <!-- フォーム操作部 -->
       <a th:href="@{/players}" class="btn btn-secondary">戻る</a>
       <button type="submit" class="btn btn-primary">追加</button>
