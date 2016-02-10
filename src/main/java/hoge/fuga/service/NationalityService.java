@@ -29,4 +29,14 @@ public class NationalityService {
     public List<Nationality> findAll() {
         return nationalityRepository.findAll();
     }
+
+    /**
+     * 国籍IDが存在するか検証します.
+     * @param id 国籍ID
+     * @return 国籍IDが存在するか. true: 利用あり. false: 利用なし.
+     */
+    @Transactional(readOnly = true)
+    public boolean isExistingNationalityId(Integer id) {
+        return nationalityRepository.countById(id) == 1;
+    }
 }

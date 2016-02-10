@@ -10,9 +10,9 @@ import hoge.fuga.domain.Player;
  */
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
     /**
-     * 背番号が使われている件数を取得します.
+     * 指定した背番号の件数を取得します.
      * @param squadNumber 背番号
-     * @return 背番号が使われている件数
+     * @return 指定した背番号の件数
      */
     public int countBySquadNumber(Integer squadNumber);
 }

@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import hoge.fuga.validator.ExistingNationalityId;
 import hoge.fuga.validator.MaxSize;
 import hoge.fuga.validator.UnusedSquadNumber;
 import lombok.Data;
@@ -42,9 +43,7 @@ public class PlayerForm {
     private String positionCode;
 
     /** 国籍のID. */
-    @NotNull // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
-//TODO DBの存在チェック
-    @Min(1)
-    @Max(99)
+    @NotNull               // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
+    @ExistingNationalityId // 【解説】独自に用意した Validator です.
     private Integer nationalityId;
 }
