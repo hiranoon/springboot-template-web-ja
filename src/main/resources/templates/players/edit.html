@@ -32,7 +32,7 @@
       <div th:replace="players/fragments::formContents"></div>
       <!-- フォーム操作部 -->
       <a th:href="@{/players}" class="btn btn-secondary">戻る</a>
-      <input type="hidden" name="id" th:value="${id}">
+      <input type="hidden" name="id" th:value="*{id}">
       <button type="submit" class="btn btn-primary">更新</button>
     </form>
   </div><!-- /.container -->
