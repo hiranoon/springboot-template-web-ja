@@ -15,7 +15,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * 同一の背番号が既に利用されているか検証するためのアノテーションです.
+ * 未使用の背番号であるか検証するためのアノテーション.
  * @author hirano
  */
 @Documented

@@ -78,7 +78,7 @@ public class PlayerService {
     }
 
     /**
-     * 背番号が利用されているかどうか検証します.
+     * 背番号が利用されているか検証します.
      * @param squadNumber 背番号
      * @return 背番号が利用されているか. true: 利用あり. false: 利用なし.
      */

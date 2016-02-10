@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import hoge.fuga.service.PlayerService;
 
 /**
- *
+ * 未使用の背番号であるか検証するための Validator クラス.
  * @author hirano
  */
 @Component
@@ -37,6 +37,7 @@ public class UnusedSquadNumberValidator implements ConstraintValidator<UnusedSqu
         if (value == null) {
             return true;
         }
+        // 背番号が利用されているか検証します.
         return playerService.isUnusedSquadNumber(value);
     }
 
