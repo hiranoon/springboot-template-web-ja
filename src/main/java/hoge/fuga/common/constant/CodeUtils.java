@@ -37,7 +37,7 @@ public class CodeUtils {
                 .filter(x -> x.getId().equals(id)) // コードIDが合致する Code を抽出します.
                 .map(x -> x.getName())             // Code から Code の name に変換します.
                 .findFirst();                      // 最初の要素を返却していますが、仕様上一意に決まる想定です.
-        // コードの name を取得して返却します.
+        // コード名称を返却します.
         return codeName.orElse("");
     }
 
