@@ -3,10 +3,11 @@ package hoge.fuga.web;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import hoge.fuga.common.constant.CodeConsts;
+import hoge.fuga.validator.ExistingCode;
 import hoge.fuga.validator.ExistingNationalityId;
 import hoge.fuga.validator.MaxSize;
 import hoge.fuga.validator.UnusedSquadNumber;
@@ -20,7 +21,7 @@ import lombok.Data;
 public class PlayerForm {
     /**
      * ID.
-     * 更新時には指定されます. 登録時には指定されません.
+     * 更新時に指定されます. 登録時には指定されません.
      */
     private Integer id;
 
@@ -37,9 +38,8 @@ public class PlayerForm {
     private String name;
 
     /** ポジションコード. */
-    @NotBlank // 【解説】空文字やスペースのみをエラーにします.
-//TODO code でのチェック
-    @Size(min = 1, max = 1)
+    @NotBlank                                                // 【解説】空文字やスペースのみをエラーにします.
+    @ExistingCode(codeClass = CodeConsts.PositionCode.class) // 【解説】独自に用意した Validator です.
     private String positionCode;
 
     /** 国籍のID. */

@@ -40,5 +40,4 @@ public class ExistingNationalityIdValidator implements ConstraintValidator<Exist
         // 背番号が利用されているか検証します.
         return nationalityService.isExistingNationalityId(value);
     }
-
 }

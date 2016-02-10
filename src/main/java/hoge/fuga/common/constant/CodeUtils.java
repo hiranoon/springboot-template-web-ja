@@ -17,15 +17,17 @@ public class CodeUtils {
 
     /**
      * 指定されたコードのクラスとコードIDからコード名称を取得します.
-     *
+     * <p>
      * 存在しないコードIDが指定された場合は空文字を返却します.
      * <blockquote><pre>
      * // 以下の例では "DF" が取得されます.
      * CodeUtil.getCodeName(CodeConst.PositionCode.class, "2");
      * </pre></blockquote>
-     *
+     * </p>
+     * <p>
      * また、指定されるクラスは {@link Code} を実装した enum であること、
      * コードには同じコードIDが存在していないことを前提としています.
+     * </p>
      *
      * @param codeClass コードのクラス
      * @param id コードID
@@ -40,5 +42,17 @@ public class CodeUtils {
                 .findFirst();                      // 最初の要素を返却していますが、仕様上一意に決まる想定です.
         // コードの name を取得して返却します.
         return codeName.orElse("");
+    }
+
+    /**
+     * 指定されたコードのクラスの中に、指定されたコードIDが含まれるかチェックします.
+     * @param codeClass コードのクラス
+     * @param id コードID
+     * @return 存在するコードIDか. true: 存在する. false: 存在しない.
+     */
+    public static boolean contains(Class<? extends Code> codeClass, String id) {
+        // コードのクラスの中から id が合致する要素が存在するかチェックします.
+        return Arrays.stream(codeClass.getEnumConstants())
+                .anyMatch(x -> x.getId().equals(id));
     }
 }

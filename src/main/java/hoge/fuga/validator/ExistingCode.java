@@ -14,21 +14,23 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import hoge.fuga.common.constant.Code;
+
 /**
- * 最大文字数を検証するためのアノテーション.
+ * 存在する {@link Code} であるか検証するためのアノテーション.
  * @author hirano
  */
 @Documented
-@Constraint(validatedBy = { MaxSizeValidator.class })
+@Constraint(validatedBy = { ExistingCodeValidator.class })
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
-public @interface MaxSize {
+public @interface ExistingCode {
 
-    /** 最大文字数です. */
-    int max() default Integer.MAX_VALUE;
+    /** コードのクラスです. */
+    Class<? extends Code> codeClass();
 
     /** 出力するメッセージのデフォルト値です. */
-    String message() default "{MaxSize.message}";
+    String message() default "{ExistingCode.message}";
 
     @SuppressWarnings("javadoc")
     Class<?>[] groups() default {};
@@ -41,6 +43,6 @@ public @interface MaxSize {
     @Documented
     @SuppressWarnings("javadoc")
     public @interface List {
-        MaxSize[] value();
+        ExistingCode[] value();
     }
 }

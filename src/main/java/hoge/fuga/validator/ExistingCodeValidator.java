@@ -6,23 +6,26 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import hoge.fuga.common.constant.Code;
+import hoge.fuga.common.constant.CodeUtils;
+
 /**
- * 最大文字数を検証するための Validator クラス.
+ * 存在する {@link Code} であるか検証するための Validator クラス.
  * @author hirano
  */
 @Component
-public class MaxSizeValidator implements ConstraintValidator<MaxSize, String> {
+public class ExistingCodeValidator implements ConstraintValidator<ExistingCode, String> {
 
-    /** 最大文字数. */
-    private int max;
+    /** コードのクラス. */
+    private Class<? extends Code> codeClass;
 
     /*
      * (non-Javadoc)
      * @see javax.validation.ConstraintValidator#initialize(java.lang.annotation.Annotation)
      */
     @Override
-    public void initialize(MaxSize constraintAnnotation) {
-        max = constraintAnnotation.max();
+    public void initialize(ExistingCode constraintAnnotation) {
+        codeClass = constraintAnnotation.codeClass();
     }
 
     /*
@@ -35,7 +38,7 @@ public class MaxSizeValidator implements ConstraintValidator<MaxSize, String> {
         if (StringUtils.isEmpty(value)) {
             return true;
         }
-        // 最大文字数を超えているか検証します.
-        return value.length() <= max;
+        // 存在するコードであるか検証します.
+        return CodeUtils.contains(codeClass, value);
     }
 }

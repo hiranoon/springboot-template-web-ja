@@ -40,5 +40,4 @@ public class UnusedSquadNumberValidator implements ConstraintValidator<UnusedSqu
         // 背番号が利用されているか検証します.
         return playerService.isUnusedSquadNumber(value);
     }
-
 }
