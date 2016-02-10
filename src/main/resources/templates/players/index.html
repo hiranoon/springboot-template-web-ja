@@ -8,7 +8,7 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-  layout:decorator="layout">
+  layout:decorator="shared/layout">
 <head>
   <!-- 【解説】 <title> の要素は、 layout.html 側の $CONTENT_TITLE で利用されます. -->
   <title>選手一覧</title>
@@ -82,14 +82,14 @@
 
     <!-- ページング部 -->
     <div class="pull-left">
-      <div th:replace="/fragments::paginationInfo"></div>
+      <div th:replace="shared/fragments::pagenation-info"></div>
     </div>
     <div class="pull-right">
-      <nav th:replace="/fragments::pagenation(path='/players')"></nav>
+      <nav th:replace="shared/fragments::pagenation(path='/players')"></nav>
     </div>
 
     <!-- 削除確認ダイアログ -->
-    <div th:replace="/fragments::confirmModal(id='destroyConfirmModal', label='削除')"></div>
+    <div th:replace="shared/fragments::confirm-modal(id='destroyConfirmModal', label='削除')"></div>
 
   </div><!-- /.container -->
 
