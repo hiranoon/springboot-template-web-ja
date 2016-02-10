@@ -1,14 +1,13 @@
 package hoge.fuga.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import hoge.fuga.domain.Player;
 import hoge.fuga.domain.Nationality;
+import hoge.fuga.domain.Player;
 import hoge.fuga.repository.NationalityRepository;
 import hoge.fuga.repository.PlayerRepository;
 
@@ -33,6 +32,7 @@ public class PlayerService {
      * @param pageable ページング指定条件
      * @return ページ指定された {@link Player} の Domain クラスのリスト
      */
+    @Transactional(readOnly = true)
     public Page<Player> findAll(Pageable pageable) {
         return playerRepository.findAll(pageable);
     }
@@ -42,6 +42,7 @@ public class PlayerService {
      * @param id ID
      * @return {@link Player} の Domain クラス
      */
+    @Transactional(readOnly = true)
     public Player findOne(Integer id) {
         return playerRepository.findOne(id);
     }
@@ -74,5 +75,15 @@ public class PlayerService {
      */
     public void delete(Integer id) {
         playerRepository.delete(id);
+    }
+
+    /**
+     * 背番号が利用されているかどうか検証します.
+     * @param squadNumber 背番号
+     * @return 背番号が利用されているか. true: 利用あり. false: 利用なし.
+     */
+    @Transactional(readOnly = true)
+    public boolean isUnusedSquadNumber(Integer squadNumber) {
+        return playerRepository.countBySquadNumber(squadNumber) == 0;
     }
 }
