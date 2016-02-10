@@ -38,7 +38,7 @@
     th:include では、タグの中身だけが変わります. つまり、 th:fragment の子要素の取込になります.
     th:replace では、タグそのものが置き換わります. つまり、 th:fragment 自身の要素も含めて取り込んでくれます.
   -->
-  <nav th:replace="fragments::header"></nav>
+  <nav th:replace="shared/fragments::header"></nav>
 
   <!--
     【解説】

@@ -23,6 +23,10 @@ out
 *.swp
 *.bak
 
+# for Markdown Preview
+.*.md.html
+
+# for this project
 temp/
 .factorypath
 .springBeans
