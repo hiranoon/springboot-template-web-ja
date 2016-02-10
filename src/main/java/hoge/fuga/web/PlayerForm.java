@@ -34,11 +34,13 @@ public class PlayerForm {
 
     /** ポジションコード. */
     @NotBlank // 【解説】空文字やスペースのみをエラーにします.
-    @Size(max = 1)
+//TODO code でのチェック
+    @Size(min = 1, max = 1)
     private String positionCode;
 
     /** 国籍のID. */
     @NotNull // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
+//TODO DBの存在チェック
     @Min(1)
     @Max(99)
     private Integer nationalityId;
