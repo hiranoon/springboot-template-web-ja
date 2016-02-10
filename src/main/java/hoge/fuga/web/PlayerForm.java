@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import hoge.fuga.validator.MaxSize;
 import hoge.fuga.validator.UnusedSquadNumber;
 import lombok.Data;
 
@@ -26,12 +27,12 @@ public class PlayerForm {
     @NotNull // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @Min(1)
     @Max(99)
-    @UnusedSquadNumber
+    @UnusedSquadNumber // 【解説】独自に用意した Validator です.
     private Integer squadNumber;
 
     /** 名前. */
-    @NotBlank // 【解説】空文字やスペースのみをエラーにします.
-    @Size(min = 1, max = 50)
+    @NotBlank          // 【解説】空文字やスペースのみをエラーにします.
+    @MaxSize(max = 50) // 【解説】独自に用意した Validator です.
     private String name;
 
     /** ポジションコード. */

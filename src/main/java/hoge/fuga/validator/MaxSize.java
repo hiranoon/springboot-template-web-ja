@@ -15,17 +15,21 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * 未使用の背番号であるか検証するためのアノテーション.
+ * 最大文字数を検証するためのアノテーション.
+ *
  * @author hirano
  */
 @Documented
-@Constraint(validatedBy = { UnusedSquadNumberValidator.class })
+@Constraint(validatedBy = { MaxSizeValidator.class })
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
-public @interface UnusedSquadNumber {
+public @interface MaxSize {
+
+    /** 最大文字数です. */
+    int max() default Integer.MAX_VALUE;
 
     /** 出力するメッセージのデフォルト値です. */
-    String message() default "{UnusedSquadNumber.message}";
+    String message() default "{MaxSize.message}";
 
     @SuppressWarnings("javadoc")
     Class<?>[] groups() default {};
@@ -38,6 +42,6 @@ public @interface UnusedSquadNumber {
     @Documented
     @SuppressWarnings("javadoc")
     public @interface List {
-        UnusedSquadNumber[] value();
+        MaxSize[] value();
     }
 }
