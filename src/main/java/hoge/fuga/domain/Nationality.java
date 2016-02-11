@@ -1,6 +1,5 @@
 package hoge.fuga.domain;
 
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,8 +15,6 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Table(name = "nationalities")
-//TODO リクエスト毎ではなくアプリケーションスコープでキャッシュできないか？
-@Cacheable // 【解説】二次キャッシュを有効にします.
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
