@@ -48,12 +48,18 @@
     <p>この内容は表示されません。各コンテンツで定義した内容に置き換わります。</p>
   </div>
 
+  <!-- ログアウト確認ダイアログ -->
+  <div th:replace="shared/fragments::confirm-modal(id='logoutConfirmModal', label='ログアウト')"></div>
+
   <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
     th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
   <script
     src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"
     th:src="@{/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js}"></script>
+  <script
+    src="../../static/common.js"
+    th:src="@{/js/common.js}"></script>
   <!--
     【解説】
     各コンテンツごとに追加で JavaScript を利用する為の定義です.
