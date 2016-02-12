@@ -36,6 +36,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-configuration-processor')
+    // Thymeleaf
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
     // Others
     compile('org.projectlombok:lombok:1.16.6')
     compile('net.sourceforge.nekohtml:nekohtml:1.9.22')
