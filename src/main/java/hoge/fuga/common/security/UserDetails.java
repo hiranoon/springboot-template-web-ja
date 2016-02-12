@@ -1,4 +1,4 @@
-package hoge.fuga.service;
+package hoge.fuga.common.security;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 
@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * ログインユーザー情報を保持する Model クラス.
+ * ユーザー情報を保持する Model クラス.
  * <p>
  * Spring Security の {@link org.springframework.security.core.userdetails.User} の拡張クラスです.
  * </p>
@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class LoginUser extends org.springframework.security.core.userdetails.User {
+public class UserDetails extends org.springframework.security.core.userdetails.User {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class LoginUser extends org.springframework.security.core.userdetails.Use
      * コンストラクタ.
      * @param user {@link User} オブジェクト.
      */
-    public LoginUser(User user) {
+    public UserDetails(User user) {
         super(user.getUsername(),
               user.getEncryptedPassword(),
               AuthorityUtils.createAuthorityList("ROLE_USER")); // ロールは固定とします.

@@ -1,23 +1,20 @@
-package hoge.fuga.service;
+package hoge.fuga.common.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import hoge.fuga.domain.Player;
 import hoge.fuga.domain.User;
 import hoge.fuga.repository.UserRepository;
 
 /**
- * ユーザーの Service クラス.
+ * {@link UserDetailsService} の実装クラス.
  * @author hirano
  */
 @Service
-@Transactional
-public class LoginUserService implements UserDetailsService {
+public class UserDetailsServiceImple implements UserDetailsService {
 
     /** {@link Player} の Repository クラス */
     @Autowired
@@ -36,7 +33,6 @@ public class LoginUserService implements UserDetailsService {
             throw new UsernameNotFoundException("user not found.");
         }
         // ログインユーザーに詰め替えます.
-        return new LoginUser(user);
+        return new UserDetails(user);
     }
-
 }
