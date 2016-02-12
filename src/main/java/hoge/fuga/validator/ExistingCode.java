@@ -26,10 +26,10 @@ import hoge.fuga.common.constant.Code;
 @Retention(RUNTIME)
 public @interface ExistingCode {
 
-    /** コードのクラスです. */
+    /** コードのクラス. */
     Class<? extends Code> codeClass();
 
-    /** 出力するメッセージのデフォルト値です. */
+    /** 出力するメッセージのデフォルト値. */
     String message() default "{ExistingCode.message}";
 
     @SuppressWarnings("javadoc")

@@ -24,10 +24,10 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 public @interface MaxSize {
 
-    /** 最大文字数です. */
+    /** 最大文字数. */
     int max() default Integer.MAX_VALUE;
 
-    /** 出力するメッセージのデフォルト値です. */
+    /** 出力するメッセージのデフォルト値. */
     String message() default "{MaxSize.message}";
 
     @SuppressWarnings("javadoc")

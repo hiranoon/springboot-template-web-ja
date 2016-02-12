@@ -24,7 +24,10 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 public @interface UnusedSquadNumber {
 
-    /** 出力するメッセージのデフォルト値です. */
+    /** 検証の要否. */
+    boolean needsValidation() default false;
+
+    /** 出力するメッセージのデフォルト値. */
     String message() default "{UnusedSquadNumber.message}";
 
     @SuppressWarnings("javadoc")

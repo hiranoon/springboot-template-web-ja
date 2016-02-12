@@ -24,7 +24,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 public @interface ExistingNationalityId {
 
-    /** 出力するメッセージのデフォルト値です. */
+    /** 出力するメッセージのデフォルト値. */
     String message() default "{ExistingNationalityId.message}";
 
     @SuppressWarnings("javadoc")

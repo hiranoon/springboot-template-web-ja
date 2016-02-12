@@ -19,9 +19,20 @@ import lombok.Data;
  */
 @Data
 public class PlayerForm {
+
+    /** 登録グループ. <p>Validator の groups を指定するためのマーカーです.</p> */
+    public static interface Insert {
+    };
+
+    /** 更新グループ. <p>Validator の groups を指定するためのマーカーです.</p> */
+    public static interface Update {
+    };
+
     /**
      * ID.
+     * <p>
      * 更新時に指定されます. 登録時には指定されません.
+     * </p>
      */
     private Integer id;
 
@@ -29,7 +40,14 @@ public class PlayerForm {
     @NotNull // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @Min(1)
     @Max(99)
-    @UnusedSquadNumber // 【解説】独自に用意した Validator です.
+    // 【解説】
+    // 独自に用意した Validator です.
+    // groups を指定することで検証条件を切り替えています.
+    // この切替のマーカーとして Interface を用意しています.
+    @UnusedSquadNumber.List({
+        @UnusedSquadNumber(needsValidation = true, groups = Insert.class),
+        @UnusedSquadNumber(needsValidation = false, groups = Update.class)
+    })
     private Integer squadNumber;
 
     /** 名前. */

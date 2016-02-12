@@ -2,6 +2,8 @@ package hoge.fuga.controller;
 
 import java.util.List;
 
+import javax.validation.groups.Default;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,8 @@ import hoge.fuga.domain.Player;
 import hoge.fuga.service.NationalityService;
 import hoge.fuga.service.PlayerService;
 import hoge.fuga.web.PlayerForm;
+import hoge.fuga.web.PlayerForm.Insert;
+import hoge.fuga.web.PlayerForm.Update;
 
 /**
  * 選手の Controller クラス.
@@ -107,8 +111,10 @@ public class PlayerController {
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
     String create(
-            @Validated PlayerForm form, // 【解説】@Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
-            BindingResult result,       // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
+            // 【解説】@Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
+            @Validated({Insert.class, Default.class}) PlayerForm form,
+            // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
+            BindingResult result,
             Model model
             ) {
         // エラーが有るときは登録画面に戻ります.
@@ -159,8 +165,10 @@ public class PlayerController {
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
     String update(
-            @Validated PlayerForm form, // 【解説】@Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
-            BindingResult result,       // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
+            // 【解説】@Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
+            @Validated({Update.class, Default.class}) PlayerForm form,
+            // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
+            BindingResult result,
             Model model
             ) {
         // エラーが有るときは更新画面に戻ります.

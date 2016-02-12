@@ -19,12 +19,16 @@ public class UnusedSquadNumberValidator implements ConstraintValidator<UnusedSqu
     @Autowired
     PlayerService playerService;
 
+    /** 検証の要否. */
+    private boolean needsValidation;
+
     /*
      * (non-Javadoc)
      * @see javax.validation.ConstraintValidator#initialize(java.lang.annotation.Annotation)
      */
     @Override
     public void initialize(UnusedSquadNumber constraintAnnotation) {
+        needsValidation = constraintAnnotation.needsValidation();
     }
 
     /*
@@ -33,6 +37,10 @@ public class UnusedSquadNumberValidator implements ConstraintValidator<UnusedSqu
      */
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {
+        // 検証が不要ならチェックOKとします.
+        if (!needsValidation) {
+            return true;
+        }
         // 未入力は必須チェックでエラーを判定させる想定のため、チェックOKとします.
         if (value == null) {
             return true;

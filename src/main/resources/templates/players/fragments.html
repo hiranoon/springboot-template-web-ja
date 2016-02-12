@@ -11,11 +11,14 @@
 <!--
 ==================================================
 fragments of "formContents"
+@param isEdit 更新処理であるか. true: 更新処理. false: 更新処理以外(=登録処理)
 ================================================== -->
-<div th:fragment="formContents">
+<div th:fragment="formContents(isEdit)">
   <!-- 【解説】th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->
+  <!-- squadNumber -->
   <fieldset class="form-group"
-    th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'">
+    th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'"
+    th:disabled="${isEdit}">
     <label for="squadNumber" class="form-control-label">背番号</label>
     <input type="text" class="form-control"
       id="squadNumber"
@@ -26,6 +29,12 @@ fragments of "formContents"
       th:if="${#fields.hasErrors('squadNumber')}"
       th:errors="*{squadNumber}">error occurred !!</small>
   </fieldset>
+  <!-- 更新画面時の squadNumber 送信用 -->
+  <input type="hidden"
+    name="squadNumber"
+    th:field="*{squadNumber}"
+    th:if="${isEdit}">
+  <!-- name -->
   <fieldset class="form-group"
     th:classappend="${#fields.hasErrors('name')}? 'has-danger'">
     <label for="name" class="form-control-label">名前</label>
@@ -38,6 +47,7 @@ fragments of "formContents"
       th:if="${#fields.hasErrors('name')}"
       th:errors="*{name}">error occurred !!</small>
   </fieldset>
+  <!-- nationalityId -->
   <fieldset class="form-group"
     th:classappend="${#fields.hasErrors('nationalityId')}? 'has-danger'">
     <label for="nationalityId" class="form-control-label">国籍</label>
@@ -53,6 +63,7 @@ fragments of "formContents"
       th:if="${#fields.hasErrors('nationalityId')}"
       th:errors="*{nationalityId}">error occurred !!</small>
   </fieldset>
+  <!-- positionCode -->
   <fieldset class="form-group"
     th:classappend="${#fields.hasErrors('positionCode')}? 'has-danger'">
     <label for="positionCode" class="form-control-label">ポジション</label>
