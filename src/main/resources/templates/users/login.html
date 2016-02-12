@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+  【解説】
+  layout:decorator で 利用する layout を指定しています.
+  拡張子なしのファイル名を指定することで layout の切り替えが可能です.
+-->
+<html lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+  layout:decorator="shared/layout">
+<head>
+  <!-- 【解説】 <title> の要素は、 layout.html 側の $CONTENT_TITLE で利用されます. -->
+  <title>選手一覧</title>
+</head>
+<body>
+  <!--
+    【解説】
+    layout ファイルの <div layout:fragment="content">...</div> の部分が、
+    下記の layout:fragment="content" の中身に置き換わります.
+  -->
+  <div layout:fragment="content" class="container">
+
+
+    <h2>ログイン</h2>
+
+    <form th:action="@{/authenticate}" method="post">
+        <!-- SecurityConfig でエラーがあるときは loginForm?error=true に遷移するよう設定しているので、エラー時に下記 div が表示される -->
+        <div th:if="${param.error}">ユーザー名またはパスワードが正しくありません。</div>
+        <input type="text" name="username" placeholder="username" autofocus="autofocus">
+        <input type="password" name="password" placeholder="password">
+        <button type="submit">Sign in</button>
+        <csrf>
+    </form>
+
+  </div><!-- /.container -->
+
+</body>
+</html>
