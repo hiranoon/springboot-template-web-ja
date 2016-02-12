@@ -53,8 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .passwordParameter("password");         // パラメータ名(password)
         // ログアウトに関する設定をします.
         http.logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout**")) // ログアウト処理のパス
-            .logoutSuccessUrl("/login/");                               // ログアウト後の遷移先
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))   // ログアウト処理のパス
+            .logoutSuccessUrl("/login/");                                   // ログアウト後の遷移先
     }
 
     /**

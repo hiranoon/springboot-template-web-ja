@@ -36,14 +36,8 @@ public class User {
     /** 最新ログイン日時. */
     private Timestamp currentSignInAt;
 
-    /** 最新ログアウト日時. */
-    private Timestamp lastSignInAt;
-
     /** 最新ログインIPアドレス. */
     private String currentSignInIp;
-
-    /** 最新ログアウトIPアドレス. */
-    private String lastSignInIp;
 
     /** 認証失敗回数. */
     @Column(nullable = false)
