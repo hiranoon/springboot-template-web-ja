@@ -20,19 +20,35 @@
     下記の layout:fragment="content" の中身に置き換わります.
   -->
   <div layout:fragment="content" class="container">
-
-
-    <h2>ログイン</h2>
-
-    <form th:action="@{/authenticate}" method="post">
-        <!-- SecurityConfig でエラーがあるときは loginForm?error=true に遷移するよう設定しているので、エラー時に下記 div が表示される -->
-        <div th:if="${param.error}">ユーザー名またはパスワードが正しくありません。</div>
-        <input type="text" name="username" placeholder="username" autofocus="autofocus">
-        <input type="password" name="password" placeholder="password">
-        <button type="submit">Sign in</button>
-        <csrf>
-    </form>
-
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="card">
+          <div class="card-header">ログイン</div>
+          <div class="card-block">
+            <div class="card-text">
+              <form th:action="@{/authenticate}" method="post">
+                <!-- 【解説】SecurityConfig でエラーがあるときは loginForm?error=true に遷移するよう設定しているので、エラー時に下記 div が表示される -->
+                <div class="alert alert-danger" role="alert" th:if="${param.error}">
+                  ユーザー名またはパスワードが正しくありません。
+                </div>
+                <!-- フォーム部 -->
+                <fieldset class="form-group">
+                  <label for="username">ユーザー名</label>
+                  <input type="text" class="form-control" id="username" name="username" placeholder="ユーザー名を入力してください。" autofocus="autofocus">
+                </fieldset>
+                <fieldset class="form-group">
+                  <label for="password">パスワード</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="パスワードを入力してください。" >
+                </fieldset>
+                <!-- フォーム操作部 -->
+                <button type="submit" class="btn btn-primary btn-block">ログイン</button>
+                <csrf>
+              </form>
+            </div><!-- /.card-text -->
+          </div><!-- /.card-block -->
+        </div><!-- /.card -->
+      </div>
+    </div><!-- /.row -->
   </div><!-- /.container -->
 
 </body>
