@@ -67,6 +67,7 @@ public class PlayerController {
 
     /**
      * 選手の一覧画面を表示します.
+     * @param pageable ページング情報
      * @param model {@link Model} オブジェクト
      * @return 選手の一覧画面
      */
@@ -114,11 +115,14 @@ public class PlayerController {
      * @param form 画面入力内容
      * @param result 入力チェック結果
      * @param model {@link Model} オブジェクト
-     * @return 選手の一覧画面
+     * @param redirectAttributes リダイレクト後のデータ連携用セッション一時領域.
+     * @return 選手の一覧画面.
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
     String create(
-            // 【解説】@Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
+            // 【解説】
+            // @Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
+            // 登録と更新でチェック内容を変更させるためにマーカーインターフェースを指定しています.
             @Validated({Insert.class, Default.class}) PlayerForm form,
             // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             BindingResult result,
@@ -171,11 +175,14 @@ public class PlayerController {
      * @param form 画面入力内容
      * @param result 入力チェック結果
      * @param model {@link Model} オブジェクト
+     * @param redirectAttributes リダイレクト後のデータ連携用セッション一時領域.
      * @return 選手の一覧画面
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
     String update(
-            // 【解説】@Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
+            // 【解説】
+            // @Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
+            // 登録と更新でチェック内容を変更させるためにマーカーインターフェースを指定しています.
             @Validated({Update.class, Default.class}) PlayerForm form,
             // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             BindingResult result,
@@ -206,6 +213,7 @@ public class PlayerController {
     /**
      * 選手を削除します.
      * @param id パスパラメータに設定された ID
+     * @param redirectAttributes リダイレクト後のデータ連携用セッション一時領域.
      * @return 選手の一覧画面
      */
     @RequestMapping(value = "{id}/destroy", method = RequestMethod.POST)
@@ -216,7 +224,6 @@ public class PlayerController {
             RedirectAttributes redirectAttributes
             ) {
         // 選手を削除します.
-// TODO 楽観的排他制御
         playerService.delete(id);
         // 選手の一覧画面にリダイレクトします.
         redirectAttributes.addFlashAttribute("info", messageSource.getMessage("info.destroy.complete", null, null));
