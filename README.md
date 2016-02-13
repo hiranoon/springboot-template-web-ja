@@ -10,17 +10,18 @@ springboot-template-web-ja
 
 - CRUD操作。
   特定のテーブル(選手テーブル)のデータのCRUD(一覧表示、登録、更新、削除)が行えます。
-- ページネーション
+- ページネーション。
   一覧表示部分にはページネーションが付いています。
 - テーブル連結。
   複数のテーブル(選手テーブルと国籍テーブル)を連結して画面表示しています。
   JPA の遅延ロードを利用しています。
-- Heroku へのデプロイ。
-  Heroku へデプロイできるようにしています。
+- JPA での LocalDateTime の使用。
 - コードの enum 管理。
   1: A, 2: B, 3: O, 4: AB 、のようなものをコードと呼ぶことにします。
   このコードを enum で管理する仕組みを用意しています。
   コードのプルダウンなども作成しやすいよう考慮しています。
+- Heroku へのデプロイ。
+  Heroku へデプロイできるようにしています。
 
 ### 諦めていること。
 
@@ -93,8 +94,21 @@ DB アクセス
 Ruby on Rails と同じような命名としました。
 
 PK は `id` 、名称は `name` のように、汎用的な命名としています。
-これは、プロパティにアクセスする際に `player.playerId` ではなく `player.id` とするためです。
-なお、他のテーブルの `id` を表現する場合は、 `nationarity_id` のように、プレフィックスに他のテーブルの名称の単数形を付けるようにします。
+プロパティにアクセスする際に `player.playerId` ではなく `player.id` となり、より自然に読むことができるようにするためです。
+
+他のテーブルの `id` を表現する場合は、 `nationarity_id` のように、プレフィックスに他のテーブルの名称の単数形を付けるようにします。
+
+### Date and Time API の利用
+
+JPA は、 `LocalDateTime` などの Date and Time API には対応していません。
+ですが、 `@Entity` を付与したクラスでも Date and Time API を使いたいです。
+
+これを解決するため、 `LocalDateTimeAttributeConverter` を用意し、 `LocalDateTime` と `Timestamp` を自動変換するようにしています。
+この `LocalDateTimeAttributeConverter` 以外に `Timestamp` が登場することがないため、思う存分 Date and Time API に依存したコードを書くことができるようになります。
+
+参考）
+[How to persist LocalDate and LocalDateTime with JPA](http://www.thoughts-on-java.org/persist-localdate-localdatetime-jpa/)
+
 
 ### コード
 
@@ -103,6 +117,8 @@ A型: 1、B型: 2、O型: 3、AB型:4、のようなよくある区分はコー�
 コードは `id` と `name` というプロパティを保持した `enum` で作成します。
 `enum` は `CodeConsts` の中に定義します。
 各コードは、 `Code` インターフェースを実装します。
+
+
 
 
 Thymeleaf
