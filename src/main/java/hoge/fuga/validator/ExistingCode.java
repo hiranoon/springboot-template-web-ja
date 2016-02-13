@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import hoge.fuga.common.constant.Code;
+import hoge.fuga.common.code.Code;
 
 /**
  * 存在する {@link Code} であるか検証するためのアノテーション.

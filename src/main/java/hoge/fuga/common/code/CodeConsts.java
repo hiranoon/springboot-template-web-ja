@@ -1,4 +1,4 @@
-package hoge.fuga.common.constant;
+package hoge.fuga.common.code;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

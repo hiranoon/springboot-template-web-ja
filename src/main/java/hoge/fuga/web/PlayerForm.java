@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import hoge.fuga.common.constant.CodeConsts;
+import hoge.fuga.common.code.CodeConsts;
 import hoge.fuga.validator.ExistingCode;
 import hoge.fuga.validator.ExistingNationalityId;
 import hoge.fuga.validator.MaxSize;

@@ -9,8 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import hoge.fuga.common.constant.CodeConsts;
-import hoge.fuga.common.constant.CodeUtils;
+import hoge.fuga.common.code.CodeConsts;
+import hoge.fuga.common.code.CodeUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

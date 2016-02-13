@@ -6,8 +6,8 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import hoge.fuga.common.constant.Code;
-import hoge.fuga.common.constant.CodeUtils;
+import hoge.fuga.common.code.Code;
+import hoge.fuga.common.code.CodeUtils;
 
 /**
  * 存在する {@link Code} であるか検証するための Validator クラス.

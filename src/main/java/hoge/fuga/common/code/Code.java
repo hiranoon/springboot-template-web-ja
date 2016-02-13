@@ -1,4 +1,4 @@
-package hoge.fuga.common.constant;
+package hoge.fuga.common.code;
 
 /**
  * コードであることを示すマーカーインターフェースです.

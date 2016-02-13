@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import hoge.fuga.common.constant.CodeConsts;
+import hoge.fuga.common.code.CodeConsts;
 import hoge.fuga.domain.Nationality;
 import hoge.fuga.domain.Player;
 import hoge.fuga.service.NationalityService;
