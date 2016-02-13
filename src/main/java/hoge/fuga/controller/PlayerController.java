@@ -6,6 +6,8 @@ import javax.validation.groups.Default;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hoge.fuga.common.code.CodeConsts;
 import hoge.fuga.domain.Nationality;
@@ -43,6 +46,10 @@ public class PlayerController {
     /** 国籍の Service クラス. */
     @Autowired
     NationalityService nationalityService;
+
+    /** メッセージソース. */
+    @Autowired
+    MessageSource messageSource;
 
     // 【解説】
     // @ModelAttribute があると @RequestMapping のメソッドの前に呼ばれます.
@@ -169,7 +176,8 @@ public class PlayerController {
             @Validated({Update.class, Default.class}) PlayerForm form,
             // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             BindingResult result,
-            Model model
+            Model model,
+            RedirectAttributes redirectAttributes
             ) {
         // エラーが有るときは更新画面に戻ります.
         if (result.hasErrors()) {
@@ -179,9 +187,15 @@ public class PlayerController {
         Player player = new Player();
         BeanUtils.copyProperties(form, player);
         // 選手を更新します.
-// TODO 楽観的排他制御
-        playerService.update(player, form.getNationalityId());
+        try {
+            playerService.update(player, form.getNationalityId());
+        } catch (OptimisticLockingFailureException e) {
+            // 楽観的排他制御エラーが発生した場合はエラーメッセージを設定し、選手の一覧画面にリダイレクトします.
+            redirectAttributes.addFlashAttribute("error", messageSource.getMessage("errors.optimisticlocking", null, null));
+            return "redirect:/players";
+        }
         // 選手の一覧画面にリダイレクトします.
+        redirectAttributes.addFlashAttribute("info", messageSource.getMessage("info.update.complete", null, null));
         return "redirect:/players"; // 【解説】リダイレクトをする場合は先頭に「redirect:」を付けます.
     }
 

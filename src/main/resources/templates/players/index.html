@@ -21,6 +21,14 @@
   <div layout:fragment="content" class="container">
     <h2>選手一覧</h2>
 
+    <!-- メッセージ部 -->
+    <div class="alert alert-info" role="alert" th:if="${info}">
+      <span th:text="${info}">info!</span>
+    </div>
+    <div class="alert alert-danger" role="alert" th:if="${error}">
+      <span th:text="${error}">error!</span>
+    </div>
+
     <!-- 操作部 -->
     <div class="card">
       <div class="card-block bg-faded">

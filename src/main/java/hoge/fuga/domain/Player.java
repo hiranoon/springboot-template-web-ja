@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import hoge.fuga.common.code.CodeConsts;
 import hoge.fuga.common.code.CodeUtils;
@@ -53,6 +54,10 @@ public class Player {
     // 外部キー(結合元のカラム名)を指定しています.
     @JoinColumn(nullable = false, name = "nationality_id")
     private Nationality nationality;
+
+    /** バージョン. */
+    @Version
+    private int version;
 
     // 【解説】
     // 当該プロジェクトでは、 CodeConsts に定義されたコードの名称を取得するには以下のように行います.

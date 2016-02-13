@@ -10,7 +10,7 @@
   layout:decorator="shared/layout">
 <head>
   <!-- 【解説】 <title> の要素は、 layout.html 側の $CONTENT_TITLE で利用されます. -->
-  <title>選手一覧</title>
+  <title>ログイン</title>
 </head>
 <body>
   <!--
@@ -26,10 +26,12 @@
           <div class="card-block">
             <div class="card-text">
               <form th:action="@{/authenticate}" method="post">
-                <!-- 【解説】SecurityConfig でエラーがあるときは loginForm?error=true に遷移するよう設定しているので、エラー時に下記 div が表示される -->
-                <div class="alert alert-danger" role="alert" th:if="${param.error}">
-                  ユーザー名またはパスワードが正しくありません。
-                </div>
+                <!--
+                  【解説】
+                  SecurityConfig でエラーがあるときは loginForm?error=true に遷移するよう設定しているので、エラー時に下記 div が表示されます.
+                  エラーメッセージはメッセージソース(message.properties)から取得しています.
+                -->
+                <div class="alert alert-danger" role="alert" th:if="${param.error}" th:text="#{errors.login.invalid}">error!</div>
                 <!-- フォーム部 -->
                 <fieldset class="form-group">
                   <label for="username">ユーザー名</label>

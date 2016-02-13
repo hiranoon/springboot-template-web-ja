@@ -30,9 +30,7 @@ public class PlayerForm {
 
     /**
      * ID.
-     * <p>
-     * 更新時に指定されます. 登録時には指定されません.
-     * </p>
+     * <p>更新時に指定されます. 登録時には指定されません.</p>
      */
     private Integer id;
 
@@ -64,4 +62,10 @@ public class PlayerForm {
     @NotNull               // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
     @ExistingNationalityId // 【解説】独自に用意した Validator です.
     private Integer nationalityId;
+
+    /**
+     * バージョン.
+     * <p>更新時に指定されます. 登録時には指定されません.</p>
+     */
+    private Integer version;
 }
