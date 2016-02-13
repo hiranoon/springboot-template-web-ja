@@ -122,7 +122,9 @@ public class PlayerController {
             @Validated({Insert.class, Default.class}) PlayerForm form,
             // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             BindingResult result,
-            Model model
+            Model model,
+            // 【解説】リダイレクト後に値を連携するために一時的にセッションに保持してくれるモデルです.
+            RedirectAttributes redirectAttributes
             ) {
         // エラーが有るときは登録画面に戻ります.
         if (result.hasErrors()) { // 【解説】BindingResult#hasErrors でエラーの有無を確認できます.
@@ -133,6 +135,7 @@ public class PlayerController {
         BeanUtils.copyProperties(form, player);
         playerService.create(player, form.getNationalityId());
         // 選手の一覧画面にリダイレクトします.
+        redirectAttributes.addFlashAttribute("info", messageSource.getMessage("info.create.complete", null, null));
         return "redirect:/players"; // 【解説】リダイレクトをする場合は先頭に「redirect:」を付けます.
     }
 
@@ -177,6 +180,7 @@ public class PlayerController {
             // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             BindingResult result,
             Model model,
+            // 【解説】リダイレクト後に値を連携するために一時的にセッションに保持してくれるモデルです.
             RedirectAttributes redirectAttributes
             ) {
         // エラーが有るときは更新画面に戻ります.
@@ -206,12 +210,16 @@ public class PlayerController {
      */
     @RequestMapping(value = "{id}/destroy", method = RequestMethod.POST)
     String destroy(
-            @PathVariable("id") Integer id // 【解説】パスパラメータは @PathVariable で取得できます.
+            // 【解説】パスパラメータは @PathVariable で取得できます.
+            @PathVariable("id") Integer id,
+            // 【解説】リダイレクト後に値を連携するために一時的にセッションに保持してくれるモデルです.
+            RedirectAttributes redirectAttributes
             ) {
         // 選手を削除します.
 // TODO 楽観的排他制御
         playerService.delete(id);
         // 選手の一覧画面にリダイレクトします.
+        redirectAttributes.addFlashAttribute("info", messageSource.getMessage("info.destroy.complete", null, null));
         return "redirect:/players"; // 【解説】リダイレクトをする場合は先頭に「redirect:」を付けます.
     }
 }

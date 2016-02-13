@@ -57,7 +57,7 @@ public class Player {
 
     /** バージョン. */
     @Version
-    private int version;
+    private Integer version;
 
     // 【解説】
     // 当該プロジェクトでは、 CodeConsts に定義されたコードの名称を取得するには以下のように行います.
