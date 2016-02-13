@@ -1,6 +1,6 @@
 package hoge.fuga.service;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,9 +34,8 @@ public class UserService {
      */
     public User updateForAuthenticationSuccess(User user) {
         // ユーザー情報をセットします.
-        Timestamp now = new Timestamp(System.currentTimeMillis());
         user.setSignInCount(user.getSignInCount() + 1);     // ログイン回数をインクリメントします.
-        user.setCurrentSignInAt(now);                       // 最新ログイン日時
+        user.setCurrentSignInAt(LocalDateTime.now());                       // 最新ログイン日時
         user.setCurrentSignInIp(request.getRemoteAddr());   // 最新ログインIPアドレス
         user.setFailedAttempts(0);                          // 認証失敗回数をリセットします.
         // 更新します.
@@ -71,8 +70,7 @@ public class UserService {
      */
     private User update(User user) {
         // ユーザー情報をセットします.
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        user.setUpdatedAt(now);
+        user.setUpdatedAt(LocalDateTime.now());
         // 更新します.
         return userRepository.save(user);
     }

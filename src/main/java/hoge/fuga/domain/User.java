@@ -1,6 +1,6 @@
 package hoge.fuga.domain;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +34,7 @@ public class User {
     private Integer signInCount;
 
     /** 最新ログイン日時. */
-    private Timestamp currentSignInAt;
+    private LocalDateTime currentSignInAt;
 
     /** 最新ログインIPアドレス. */
     private String currentSignInIp;
@@ -44,11 +44,11 @@ public class User {
     private Integer failedAttempts;
 
     /** アカウントロック日時. */
-    private Timestamp lockedAt;
+    private LocalDateTime lockedAt;
 
     /** 登録日時. */
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     /** 更新日時. */
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 }
