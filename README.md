@@ -161,5 +161,3 @@ fragments.html では、IDEのエラーがでないよう下記のように `<ht
 </html>
 ```
 
-
-
