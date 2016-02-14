@@ -6,6 +6,7 @@ create table users (
     current_sign_in_ip  varchar(255),
     failed_attempts     int             default 0 not null,
     locked_at           datetime,
-    created_at          datetime,
-    updated_at          datetime
+    created_at          datetime        default current_timestamp not null,
+    updated_at          datetime,
+    version             int             default 0 not null
 );

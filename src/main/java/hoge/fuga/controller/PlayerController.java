@@ -195,7 +195,7 @@ public class PlayerController {
             return edit(form.getId(), form, model);
         }
         // Form より Player オブジェクトを生成します.
-        Player player = new Player();
+        Player player = playerService.findOne(form.getId());
         BeanUtils.copyProperties(form, player);
         // 選手を更新します.
         try {

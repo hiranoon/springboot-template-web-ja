@@ -1,5 +1,7 @@
 package hoge.fuga.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -55,6 +59,12 @@ public class Player {
     @JoinColumn(nullable = false, name = "nationality_id")
     private Nationality nationality;
 
+    /** 登録日時. */
+    private LocalDateTime createdAt;
+
+    /** 更新日時. */
+    private LocalDateTime updatedAt;
+
     /** バージョン. */
     @Version
     private Integer version;
@@ -73,5 +83,29 @@ public class Player {
      */
     public String getPositionCodeName() {
         return CodeUtils.getCodeName(CodeConsts.PositionCode.class, getPositionCode());
+    }
+
+    // 【解説】
+    // 登録日時、更新日時を自動でセットするための機能です.
+    // 各 Entity クラスに実装していますが、
+    // これらのカラムを保持するのがルールとして決められるのであれば、
+    // AbstractEntity のような親クラスに持ってもいいと思います.
+    // Listner クラスを作って、 @EntityListeners(HogeLintener.class) と指定する方法もあります.
+    // 参考) https://gist.github.com/php-coder/1391084
+
+    /**
+     * 登録日時に現在日時をセットします.
+     */
+    @PrePersist
+    void touchCreatedAt() {
+        setCreatedAt(LocalDateTime.now());
+    }
+
+    /**
+     * 更新日時に現在日時をセットします.
+     */
+    @PreUpdate
+    void touchUpdatedAt() {
+        setUpdatedAt(LocalDateTime.now());
     }
 }

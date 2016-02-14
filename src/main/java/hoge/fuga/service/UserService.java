@@ -35,11 +35,11 @@ public class UserService {
     public User updateForAuthenticationSuccess(User user) {
         // ユーザー情報をセットします.
         user.setSignInCount(user.getSignInCount() + 1);     // ログイン回数をインクリメントします.
-        user.setCurrentSignInAt(LocalDateTime.now());                       // 最新ログイン日時
+        user.setCurrentSignInAt(LocalDateTime.now());       // 最新ログイン日時
         user.setCurrentSignInIp(request.getRemoteAddr());   // 最新ログインIPアドレス
         user.setFailedAttempts(0);                          // 認証失敗回数をリセットします.
         // 更新します.
-        return update(user);
+        return userRepository.save(user);
     }
 
     /**
@@ -59,18 +59,6 @@ public class UserService {
         }
         // ユーザー情報をセットします.
         user.setFailedAttempts(user.getFailedAttempts() + 1);   // 認証失敗回数をインクリメントします.
-        // 更新します.
-        return update(user);
-    }
-
-    /**
-     * {@link User} を更新します.
-     * @param user {@link User} の Domain クラス
-     * @return 更新した {@link User} の Domain クラス
-     */
-    private User update(User user) {
-        // ユーザー情報をセットします.
-        user.setUpdatedAt(LocalDateTime.now());
         // 更新します.
         return userRepository.save(user);
     }
