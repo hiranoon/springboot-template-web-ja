@@ -80,7 +80,7 @@ dependencies {
 | web        | 画面単位 |
 | service    | 画面単位 |
 | repository | テーブル単位 |
-| domain     | テーブル単位 |
+| entity     | テーブル単位 |
 
 
 

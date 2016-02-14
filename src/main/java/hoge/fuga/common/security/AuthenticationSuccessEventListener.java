@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 
-import hoge.fuga.domain.User;
+import hoge.fuga.entity.User;
 import hoge.fuga.service.UserService;
 
 /**

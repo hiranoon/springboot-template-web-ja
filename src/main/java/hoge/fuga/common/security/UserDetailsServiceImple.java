@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import hoge.fuga.domain.Player;
-import hoge.fuga.domain.User;
+import hoge.fuga.entity.Player;
+import hoge.fuga.entity.User;
 import hoge.fuga.repository.UserRepository;
 
 /**

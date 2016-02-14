@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hoge.fuga.common.code.CodeConsts;
-import hoge.fuga.domain.Nationality;
-import hoge.fuga.domain.Player;
+import hoge.fuga.entity.Nationality;
+import hoge.fuga.entity.Player;
 import hoge.fuga.service.NationalityService;
 import hoge.fuga.service.PlayerService;
 import hoge.fuga.web.PlayerForm;

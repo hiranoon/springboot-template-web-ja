@@ -2,7 +2,7 @@ package hoge.fuga.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import hoge.fuga.domain.Player;
+import hoge.fuga.entity.Player;
 
 /**
  * {@link Player} の Repository クラス.

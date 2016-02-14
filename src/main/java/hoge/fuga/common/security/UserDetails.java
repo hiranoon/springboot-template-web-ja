@@ -2,7 +2,7 @@ package hoge.fuga.common.security;
 
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import hoge.fuga.domain.User;
+import hoge.fuga.entity.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,7 +19,7 @@ public class UserDetails extends org.springframework.security.core.userdetails.U
 
     private static final long serialVersionUID = 1L;
 
-    /** ユーザー(users)テーブルの Domain クラス. */
+    /** ユーザー(users)テーブルの Entity クラス. */
     private final User user;
 
     /**

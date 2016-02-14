@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import hoge.fuga.domain.User;
+import hoge.fuga.entity.User;
 import hoge.fuga.repository.UserRepository;
 
 /**
@@ -29,8 +29,8 @@ public class UserService {
 
     /**
      * ログイン成功時に {@link User} を更新します.
-     * @param user {@link User} の Domain クラス
-     * @return 更新した {@link User} の Domain クラス
+     * @param user {@link User} の Entity クラス
+     * @return 更新した {@link User} の Entity クラス
      */
     public User updateForAuthenticationSuccess(User user) {
         // ユーザー情報をセットします.
@@ -48,7 +48,7 @@ public class UserService {
      * 存在しないユーザー名の場合は何も行いません.
      * </p>
      * @param username ユーザー名
-     * @return 更新した {@link User} の Domain クラス
+     * @return 更新した {@link User} の Entity クラス
      */
     public User updateForAuthenticationFailureBadCredentials(String username) {
         // ユーザーを取得します.

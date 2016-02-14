@@ -1,4 +1,4 @@
-package hoge.fuga.domain;
+package hoge.fuga.entity;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * ユーザー(users)テーブルの Domain クラス.
+ * ユーザー(users)テーブルの Entity クラス.
  * @author hirano
  */
 @Entity

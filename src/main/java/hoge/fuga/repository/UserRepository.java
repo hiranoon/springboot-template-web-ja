@@ -2,7 +2,7 @@ package hoge.fuga.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import hoge.fuga.domain.User;
+import hoge.fuga.entity.User;
 
 /**
  * {@link User} の Repository クラス.

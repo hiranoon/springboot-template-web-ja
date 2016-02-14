@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import hoge.fuga.domain.Nationality;
-import hoge.fuga.domain.Player;
+import hoge.fuga.entity.Nationality;
+import hoge.fuga.entity.Player;
 import hoge.fuga.repository.NationalityRepository;
 import hoge.fuga.repository.PlayerRepository;
 
@@ -30,7 +30,7 @@ public class PlayerService {
     /**
      * {@link Player} をページング指定条件にしたがって検索します.
      * @param pageable ページング指定条件
-     * @return ページ指定された {@link Player} の Domain クラスのリスト
+     * @return ページ指定された {@link Player} の Entity クラスのリスト
      */
     @Transactional(readOnly = true)
     public Page<Player> findAll(Pageable pageable) {
@@ -40,7 +40,7 @@ public class PlayerService {
     /**
      * {@link Player} を ID で1件検索します.
      * @param id ID
-     * @return {@link Player} の Domain クラス
+     * @return {@link Player} の Entity クラス
      */
     @Transactional(readOnly = true)
     public Player findOne(Integer id) {
@@ -49,9 +49,9 @@ public class PlayerService {
 
     /**
      * {@link Player} を作成します.
-     * @param player {@link Player} の Domain クラス
+     * @param player {@link Player} の Entity クラス
      * @param nationarityId 国籍ID
-     * @return 作成した {@link Player} の Domain クラス
+     * @return 作成した {@link Player} の Entity クラス
      */
     public Player create(Player player, Integer nationarityId) {
         player.setNationality(nationarityRepository.findOne(nationarityId));
@@ -60,9 +60,9 @@ public class PlayerService {
 
     /**
      * {@link Player} を更新します.
-     * @param player {@link Player} の Domain クラス
+     * @param player {@link Player} の Entity クラス
      * @param nationarityId 国籍ID
-     * @return 更新した {@link Player} の Domain クラス
+     * @return 更新した {@link Player} の Entity クラス
      */
     public Player update(Player player, Integer nationarityId) {
         player.setNationality(nationarityRepository.findOne(nationarityId));

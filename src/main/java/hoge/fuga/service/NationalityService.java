@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import hoge.fuga.domain.Nationality;
+import hoge.fuga.entity.Nationality;
 import hoge.fuga.repository.NationalityRepository;
 
 /**
@@ -23,7 +23,7 @@ public class NationalityService {
 
     /**
      * {@link Nationality} を全件検索します.
-     * @return {@link Nationality} の Domain クラスのリスト
+     * @return {@link Nationality} の Entity クラスのリスト
      */
     @Transactional(readOnly = true)
     public List<Nationality> findAll() {

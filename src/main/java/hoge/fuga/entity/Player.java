@@ -1,4 +1,4 @@
-package hoge.fuga.domain;
+package hoge.fuga.entity;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +21,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 選手(players)テーブルの Domain クラス.
+ * 選手(players)テーブルの Entity クラス.
  * @author hirano
  */
 @Entity
@@ -71,7 +71,7 @@ public class Player {
 
     // 【解説】
     // 当該プロジェクトでは、 CodeConsts に定義されたコードの名称を取得するには以下のように行います.
-    // Domain クラス(当該クラス)のプロパティはコードIDを保持し、コード名称を取得するメソッドを別途用意します.
+    // Entity クラス(当該クラス)のプロパティはコードIDを保持し、コード名称を取得するメソッドを別途用意します.
     // "get + コードのプロパティ名 + Name()" という命名にします.
     // getter ですので、 html(thymeleaf) 側では、
     // <td th:text="${player.positionCodeName}">ゴールキーパー</td>
@@ -88,8 +88,6 @@ public class Player {
     // 【解説】
     // 登録日時、更新日時を自動でセットするための機能です.
     // 各 Entity クラスに実装していますが、
-    // これらのカラムを保持するのがルールとして決められるのであれば、
-    // AbstractEntity のような親クラスに持ってもいいと思います.
     // Listner クラスを作って、 @EntityListeners(HogeLintener.class) と指定する方法もあります.
     // 参考) https://gist.github.com/php-coder/1391084
 
