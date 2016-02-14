@@ -30,3 +30,4 @@ out
 temp/
 .factorypath
 .springBeans
+/.apt_generated/
