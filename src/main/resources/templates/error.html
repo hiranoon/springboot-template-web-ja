@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+  【解説】
+  layout:decorator で 利用する layout を指定しています.
+  拡張子なしのファイル名を指定することで layout の切り替えが可能です.
+-->
+<html lang="ja"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorator="shared/layout">
+<head>
+  <!-- 【解説】 <title> の要素は、 layout.html 側の $CONTENT_TITLE で利用されます. -->
+  <title>エラー</title>
+</head>
+<body>
+  <!--
+    【解説】
+    layout ファイルの <div layout:fragment="content">...</div> の部分が、
+    下記の layout:fragment="content" の中身に置き換わります.
+  -->
+  <div layout:fragment="content" class="container">
+    <h2>エラー</h2>
+    <!-- メッセージ部 -->
+    <div class="alert alert-danger" role="alert" th:if="${status}">
+      <!--
+        【解説】
+        ${status} で HTTP Status を受け取れます.
+        これを利用してメッセージを切り替えています.
+        いずれのステータスでもホームに戻ってやり直すようにしました.
+        セッションが切れていたときは Spring Security の仕組みでログインページに飛ばされます.
+      -->
+      <span th:switch="${status}">
+        <span th:case="404" th:text="#{errors.errorpage.notfound}">error!</span>
+        <span th:case="*"   th:text="#{errors.errorpage.fatal}">error!</span>
+      </span>
+      <a th:href="@{/players}">ホーム</a>に戻ってやり直してください。
+    </div>
+  </div><!-- /.container -->
+
+</body>
+</html>
