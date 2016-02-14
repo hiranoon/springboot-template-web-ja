@@ -4,7 +4,7 @@ create table players (
     name            varchar(100),
     position_code   varchar(1),
     nationality_id  int,
-    created_at      datetime        default current_timestamp not null,
+    created_at      datetime        not null,
     updated_at      datetime,
     version         int             default 0 not null
 );
@@ -12,7 +12,7 @@ create table players (
 create table nationalities (
     id          int             primary key,
     name        varchar(100),
-    created_at  datetime        default current_timestamp not null,
+    created_at  datetime        not null,
     updated_at  datetime,
     version     int             default 0 not null
 );
