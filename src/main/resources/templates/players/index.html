@@ -1,26 +1,14 @@
 <!DOCTYPE html>
-<!--
-  【解説】
-  layout:decorator で 利用する layout を指定しています.
-  拡張子なしのファイル名を指定することで layout の切り替えが可能です.
--->
 <html lang="ja"
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorator="shared/layout">
 <head>
-  <!-- 【解説】 <title> の要素は、 layout.html 側の $CONTENT_TITLE で利用されます. -->
   <title>選手一覧</title>
 </head>
 <body>
-  <!--
-    【解説】
-    layout ファイルの <div layout:fragment="content">...</div> の部分が、
-    下記の layout:fragment="content" の中身に置き換わります.
-  -->
   <div layout:fragment="content" class="container">
     <h2>選手一覧</h2>
-
     <!-- メッセージ部 -->
     <div class="alert alert-info" role="alert" th:if="${info}">
       <span th:text="${info}">info!</span>
@@ -28,7 +16,6 @@
     <div class="alert alert-danger" role="alert" th:if="${error}">
       <span th:text="${error}">error!</span>
     </div>
-
     <!-- 操作部 -->
     <div class="card">
       <div class="card-block bg-faded">
@@ -40,23 +27,16 @@
             </span>
           </div>
           <div class="col-xs-2">
-            <!-- 【解説】 @{}でコンテクスト相対パスを絶対パスに置換できます -->
             <a th:href="@{/players/add}" class="btn btn-primary">選手追加</a>
           </div>
-        </div>
-      </div>
-    </div>
-
+        </div><!-- /.row -->
+      </div><!-- /.card-block -->
+    </div><!-- /.card -->
     <!-- 一覧部 -->
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
-            <!--
-              【解説】
-              ソートの昇順降順の切り替えは switch で分岐しています.
-              page.sort.getOrderFor('プロパティ名').ascending で昇順であるか判定ができます.
-            -->
             <th th:switch="${page.sort.getOrderFor('squadNumber').ascending}">
               <a th:case="true" th:href="@{/players(sort='squadNumber,desc')}">背番号 <i class="fa fa-caret-down"></i></a>
               <a th:case="*"    th:href="@{/players(sort='squadNumber,asc')}">背番号 <i class="fa fa-caret-up"></i></a>
@@ -68,18 +48,12 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 【解説】親要素で th:each を使うことで子要素が繰り返されます. -->
           <tr th:each="player : ${page}">
             <td th:text="${player.squadNumber}">10</td>
             <td th:text="${player.name}">山田太郎</td>
             <td th:text="${player.nationality.name}">トリニダード・トバゴ</td>
             <td th:text="${player.positionCodeName}">ゴールキーパー</td>
             <td>
-              <!--
-                【解説】
-                パスパラメータは {} で表現します.
-                パラメータにセットする値はパスの最後に () で指定できます.
-              -->
               <form th:action="@{/players/{id}/destroy(id=${player.id})}" method="post">
                 <a class="btn btn-primary" th:href="@{/players/{id}/edit(id=${player.id})}">編集</a>
                 <a class="btn btn-danger" data-toggle="modal" data-target="#destroyConfirmModal" th:attr="data-id=${player.id}">削除</a>
@@ -90,7 +64,6 @@
         </tbody>
       </table>
     </div><!-- /.table-responsive -->
-
     <!-- ページング部 -->
     <div class="pull-left">
       <div th:replace="shared/fragments::pagenation-info"></div>
@@ -98,12 +71,9 @@
     <div class="pull-right">
       <nav th:replace="shared/fragments::pagenation(path='/players')"></nav>
     </div>
-
     <!-- 削除確認ダイアログ -->
     <div th:replace="shared/fragments::confirm-modal(id='destroyConfirmModal', label='削除')"></div>
-
   </div><!-- /.container -->
-
   <!-- 追加スクリプト -->
   <div layout:fragment="additionalScripts">
     <script

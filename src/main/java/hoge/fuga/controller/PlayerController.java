@@ -51,11 +51,6 @@ public class PlayerController {
     @Autowired
     MessageSource messageSource;
 
-    // 【解説】
-    // @ModelAttribute があると @RequestMapping のメソッドの前に呼ばれます.
-    // 返り値は自動で Model に追加されます.
-    // model.addAttribute(new PlayerForm); が裏で実行されることを意味します.
-    // 属性名を省略すると先頭小文字のキャメルケースになるので、「playerForm」として登録されます.
     /**
      * Form の初期化を行います.
      * @return {@link PlayerForm} オブジェクト
@@ -73,12 +68,6 @@ public class PlayerController {
      */
     @RequestMapping(method = RequestMethod.GET)
     String index(
-            // 【解説】
-            // @PageableDefault で Pageable の初期値を設定できます.
-            // ここでは、一覧に表示する件数、初期ページ番号、ソートの項目と方向を設定しています.
-            // また、 Pageable へは以下の様な URL のクエリパラメータで設定がなされます.
-            // /players?page=2&size=5&sort=squadNumber,desc
-            // クエリパラメータの設定は @PageableDefault よりも優先されます.
             @PageableDefault(
                 size = 5,
                 page = 0,
@@ -120,18 +109,13 @@ public class PlayerController {
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
     String create(
-            // 【解説】
-            // @Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
-            // 登録と更新でチェック内容を変更させるためにマーカーインターフェースを指定しています.
             @Validated({Insert.class, Default.class}) PlayerForm form,
-            // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             BindingResult result,
             Model model,
-            // 【解説】リダイレクト後に値を連携するために一時的にセッションに保持してくれるモデルです.
             RedirectAttributes redirectAttributes
             ) {
         // エラーが有るときは登録画面に戻ります.
-        if (result.hasErrors()) { // 【解説】BindingResult#hasErrors でエラーの有無を確認できます.
+        if (result.hasErrors()) {
             return add(model);
         }
         // エラーがないときは選手を登録します.
@@ -140,7 +124,7 @@ public class PlayerController {
         playerService.create(player, form.getNationalityId());
         // 選手の一覧画面にリダイレクトします.
         redirectAttributes.addFlashAttribute("info", messageSource.getMessage("info.create.complete", null, null));
-        return "redirect:/players"; // 【解説】リダイレクトをする場合は先頭に「redirect:」を付けます.
+        return "redirect:/players";
     }
 
     /**
@@ -152,8 +136,8 @@ public class PlayerController {
      */
     @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
     String edit(
-            @PathVariable("id") Integer id, // 【解説】パスパラメータは @PathVariable で取得できます.
-            PlayerForm form,                // 【解説】引数で渡ってきた段階ではブランクです. メソッド内で設定し、画面に表示させます.
+            @PathVariable("id") Integer id,
+            PlayerForm form,
             Model model
             ) {
         // パスパラメータの ID より Player を検索します.
@@ -180,14 +164,9 @@ public class PlayerController {
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
     String update(
-            // 【解説】
-            // @Validated を付与することで入力チェックが行われます. 結果は BindingResult に入ります.
-            // 登録と更新でチェック内容を変更させるためにマーカーインターフェースを指定しています.
             @Validated({Update.class, Default.class}) PlayerForm form,
-            // 【解説】入力チェック結果です. 引数の順番が重要で、 @Validated が付いた引数の次にする必要があります.
             BindingResult result,
             Model model,
-            // 【解説】リダイレクト後に値を連携するために一時的にセッションに保持してくれるモデルです.
             RedirectAttributes redirectAttributes
             ) {
         // エラーが有るときは更新画面に戻ります.
@@ -202,12 +181,12 @@ public class PlayerController {
             playerService.update(player, form.getNationalityId());
         } catch (OptimisticLockingFailureException e) {
             // 楽観的排他制御エラーが発生した場合はエラーメッセージを設定し、選手の一覧画面にリダイレクトします.
-            redirectAttributes.addFlashAttribute("error", messageSource.getMessage("errors.optimisticlocking", null, null));
+            redirectAttributes.addFlashAttribute("error", messageSource.getMessage("error.optimisticlocking", null, null));
             return "redirect:/players";
         }
         // 選手の一覧画面にリダイレクトします.
         redirectAttributes.addFlashAttribute("info", messageSource.getMessage("info.update.complete", null, null));
-        return "redirect:/players"; // 【解説】リダイレクトをする場合は先頭に「redirect:」を付けます.
+        return "redirect:/players";
     }
 
     /**
@@ -218,15 +197,13 @@ public class PlayerController {
      */
     @RequestMapping(value = "{id}/destroy", method = RequestMethod.POST)
     String destroy(
-            // 【解説】パスパラメータは @PathVariable で取得できます.
             @PathVariable("id") Integer id,
-            // 【解説】リダイレクト後に値を連携するために一時的にセッションに保持してくれるモデルです.
             RedirectAttributes redirectAttributes
             ) {
         // 選手を削除します.
         playerService.delete(id);
         // 選手の一覧画面にリダイレクトします.
         redirectAttributes.addFlashAttribute("info", messageSource.getMessage("info.destroy.complete", null, null));
-        return "redirect:/players"; // 【解説】リダイレクトをする場合は先頭に「redirect:」を付けます.
+        return "redirect:/players";
     }
 }

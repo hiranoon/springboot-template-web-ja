@@ -5,6 +5,7 @@ import lombok.Getter;
 
 /**
  * コードの定数クラスです.
+ * <p>
  * 追加する場合には以下の3点を遵守してください.
  * <ul>
  * <li>@{@link Getter} アノテーション、および @{@link AllArgsConstructor} アノテーションを付ける.</li>
@@ -12,6 +13,7 @@ import lombok.Getter;
  * <li>コードID(private final String id;)、コード名称(private final String name;)プロパティを用意する.</li>
  * </ul>
  * これらが実装されていることを前提として、ユーティリティクラス等の機能が実装されています.
+ * </p>
  * @author hirano
  */
 public class CodeConsts {

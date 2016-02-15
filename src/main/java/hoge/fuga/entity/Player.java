@@ -48,15 +48,8 @@ public class Player {
     private String positionCode;
 
     /** 国籍. */
-    // 【解説】
-    // FetchType には以下の2種類があります.
-    // LAZY  : 必要になったタイミングで Nationality の問い合わせを行います.
-    // EAGER : 予め Nationality の問い合わせを行っておきます.
-    // 問い合わせるタイミングの違いだけで、結合するか、キャッシュを利用するか、の違いはありません.
     @ManyToOne(fetch = FetchType.LAZY)
-    // 【解説】
-    // 外部キー(結合元のカラム名)を指定しています.
-    @JoinColumn(nullable = false, name = "nationality_id")
+    @JoinColumn(nullable = false, name = "nationality_id") // 外部キー
     private Nationality nationality;
 
     /** 登録日時. */
@@ -69,30 +62,18 @@ public class Player {
     @Version
     private Integer version;
 
-    // 【解説】
-    // 当該プロジェクトでは、 CodeConsts に定義されたコードの名称を取得するには以下のように行います.
-    // Entity クラス(当該クラス)のプロパティはコードIDを保持し、コード名称を取得するメソッドを別途用意します.
-    // "get + コードのプロパティ名 + Name()" という命名にします.
-    // getter ですので、 html(thymeleaf) 側では、
-    // <td th:text="${player.positionCodeName}">ゴールキーパー</td>
-    // のような形で参照することができます.
-    // コードIDからコード名称の変換には、 CodeUtils#getCodeName を利用します.
     /**
      * ポジションコードからポジション名称を取得して返却します.
      * @return ポジション名称
      */
     public String getPositionCodeName() {
+        // CodeConsts に定義されたコードの名称を取得します.
         return CodeUtils.getCodeName(CodeConsts.PositionCode.class, getPositionCode());
     }
 
-    // 【解説】
-    // 登録日時、更新日時を自動でセットするための機能です.
-    // 各 Entity クラスに実装していますが、
-    // Listner クラスを作って、 @EntityListeners(HogeLintener.class) と指定する方法もあります.
-    // 参考) https://gist.github.com/php-coder/1391084
-
     /**
      * 登録日時に現在日時をセットします.
+     * {@link @PrePersist} アノテーションにより登録時に自動実行されます.
      */
     @PrePersist
     void touchCreatedAt() {
@@ -101,6 +82,7 @@ public class Player {
 
     /**
      * 更新日時に現在日時をセットします.
+     * {@link @PreUpdate} アノテーションにより更新時に自動実行されます.
      */
     @PreUpdate
     void touchUpdatedAt() {

@@ -59,16 +59,9 @@ public class User {
     @Version
     private Integer version;
 
-    // 【解説】
-    // 登録日時、更新日時を自動でセットするための機能です.
-    // 各 Entity クラスに実装していますが、
-    // これらのカラムを保持するのがルールとして決められるのであれば、
-    // AbstractEntity のような親クラスに持ってもいいと思います.
-    // Listner クラスを作って、 @EntityListeners(HogeLintener.class) と指定する方法もあります.
-    // 参考) https://gist.github.com/php-coder/1391084
-
     /**
      * 登録日時に現在日時をセットします.
+     * {@link @PrePersist} アノテーションにより登録時に自動実行されます.
      */
     @PrePersist
     void touchCreatedAt() {
@@ -77,6 +70,7 @@ public class User {
 
     /**
      * 更新日時に現在日時をセットします.
+     * {@link @PreUpdate} アノテーションにより更新時に自動実行されます.
      */
     @PreUpdate
     void touchUpdatedAt() {

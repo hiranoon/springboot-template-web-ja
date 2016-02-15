@@ -65,7 +65,7 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
 
-// heroku デプロイ用タスク.
+// for heroku deploying.
 task stage {
     dependsOn build
 }

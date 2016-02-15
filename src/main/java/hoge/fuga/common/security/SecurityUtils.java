@@ -18,7 +18,7 @@ public class SecurityUtils {
     /**
      * 認証済みの {@link UserDetails} を取得します.
      * <p>
-     * Controller クラスのメソッド引数に、下記のように定義して取得してください.
+     * {@link UserDetails} は Controller クラスのメソッド引数に、下記のように定義して取得できます.
      * <pre>
      * String method(@AuthenticationPrincipal UserDetails userDetails ...) { ... }
      * </pre>

@@ -35,13 +35,10 @@ public class PlayerForm {
     private Integer id;
 
     /** 背番号. */
-    @NotNull // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
+    @NotNull
     @Min(1)
     @Max(99)
-    // 【解説】
-    // 独自に用意した Validator です.
-    // groups を指定することで検証条件を切り替えています.
-    // この切替のマーカーとして Interface を用意しています.
+    // 登録、更新で検証の要否を切り替えるためマーカーインターフェースを指定しています.
     @UnusedSquadNumber.List({
         @UnusedSquadNumber(needsValidation = true, groups = Insert.class),
         @UnusedSquadNumber(needsValidation = false, groups = Update.class)
@@ -49,18 +46,18 @@ public class PlayerForm {
     private Integer squadNumber;
 
     /** 名前. */
-    @NotBlank          // 【解説】空文字やスペースのみをエラーにします.
-    @MaxSize(max = 50) // 【解説】独自に用意した Validator です.
+    @NotBlank
+    @MaxSize(max = 50)
     private String name;
 
     /** ポジションコード. */
-    @NotBlank                                                // 【解説】空文字やスペースのみをエラーにします.
-    @ExistingCode(codeClass = CodeConsts.PositionCode.class) // 【解説】独自に用意した Validator です.
+    @NotBlank
+    @ExistingCode(codeClass = CodeConsts.PositionCode.class)
     private String positionCode;
 
     /** 国籍のID. */
-    @NotNull               // 【解説】必須チェックではなく、リクエストパラメータに存在するかチェックしています.
-    @ExistingNationalityId // 【解説】独自に用意した Validator です.
+    @NotNull
+    @ExistingNationalityId
     private Integer nationalityId;
 
     /**

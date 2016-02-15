@@ -1,33 +1,16 @@
 <!DOCTYPE html>
-<!--
-  【解説】
-  layout:decorator で 利用する layout を指定しています.
-  拡張子なしのファイル名を指定することで layout の切り替えが可能です.
--->
 <html lang="ja"
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorator="shared/layout">
 <head>
-  <!-- 【解説】 <title> の要素は、 layout.html 側の $CONTENT_TITLE で利用されます. -->
   <title>選手更新</title>
 </head>
 <body>
-  <!--
-    【解説】
-    layout ファイルの <div layout:fragment="content">...</div> の部分が、
-    layout:fragment="content" の中身に置き換わります.
-  -->
   <div layout:fragment="content" class="container">
     <h2>選手更新</h2>
-    <!--
-      【解説】
-      th:object="${playerForm}" で、playerForm を選択しておくと、子要素の中で playerForm.xxx と書かずに済みます.
-      th:object で選択したものは、子要素で *{} で指定できます.
-      親要素 th:object なし + 子要素 ${playerForm.name} = 親要素 th:object="${playerForm}" + 子要素 *{name}
-    -->
     <form th:action="@{/players/update}" th:object="${playerForm}" method="post">
-      <!-- フォーム部 -->
+      <!-- フォーム入力部 -->
       <div th:replace="players/fragments::formContents(true)"></div>
       <!-- フォーム操作部 -->
       <a th:href="@{/players}" class="btn btn-secondary">戻る</a>

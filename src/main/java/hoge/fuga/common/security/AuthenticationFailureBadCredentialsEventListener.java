@@ -23,6 +23,7 @@ public class AuthenticationFailureBadCredentialsEventListener
      * (non-Javadoc)
      * @see org.springframework.context.ApplicationListener#onApplicationEvent(org.springframework.context.ApplicationEvent)
      */
+    // ログイン失敗時の処理です.
     @Override
     public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {
         // ユーザー名を取得します.

@@ -13,11 +13,9 @@ fragments of "header"
       <li class="nav-item"><a class="nav-link" href="#">Dummy</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Dummy</a></li>
     </ul>
-    <!-- 【解説】#httpServletRequest.remoteUser が null の場合は未ログインと判定できます. -->
     <ul class="nav navbar-nav pull-xs-right" th:if="${#httpServletRequest.remoteUser != null}">
       <li class="nav-item dropdown">
         <a href="#" class="nav-link dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <!-- #authentication.principal で、 User オブジェクトの参照ができます. -->
           <i class="fa fa-user"></i> <span th:text="${#authentication.principal.username}">ユーザー名</span> さん
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
@@ -72,23 +70,6 @@ fragments of "pagenation"
 @param path ページングさせる一覧画面のパス. `/players` のように指定します.
 ================================================== -->
 <nav th:fragment="pagenation(path)">
-  <!--
-    【解説】
-    以下の要素を使ってページングの分岐を行っています.
-    コメントアウトを外すことで、これらの値の設定値を確認することができます.
-    <ul>
-      <li>Page が持つ値</li>
-      <li>全ページ数<span th:text="${page.totalPages}">?</span></li>
-      <li>全データ数<span th:text="${page.totalElements}">?</span></li>
-      <li>Slice (Page の親) が持つ値</li>
-      <li>1ページあたりのデータ数:<span th:text="${page.size}">?</span></li>
-      <li>現在のページ:<span th:text="${page.number}">?</span></li>
-      <li>最初のページか？<span th:text="${page.isFirst()}">?</span></li>
-      <li>最後のページか？<span th:text="${page.isLast()}">?</span></li>
-      <li>前ページはあるか？<span th:text="${page.hasPrevious()}">?</span></li>
-      <li>次ページはあるか？<span th:text="${page.hasNext()}">?</span></li>
-    </ul>
-  -->
   <ul class="pagination">
     <li class="page-item" th:classappend="${page.number + 0 <= 0}? 'disabled'">
       <a class="page-link" aria-label="Previous"

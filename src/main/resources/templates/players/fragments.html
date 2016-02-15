@@ -2,19 +2,11 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <!--
-  【解説】
-  <form th:object="${playerForm}"> のように上位のタグ内で playerForm を選択しておくと、子要素の中で ${playerForm.xxx} と書かずに済みます.
-  th:object で選択したものは、子要素で *{} で指定できます.("$" ではなく 参照を意味する "*" になることに注意!)
-  親要素 th:object なし + 子要素 ${playerForm.name} = 親要素 th:object="${playerForm}" + 子要素 *{name}
--->
-
-<!--
 ==================================================
 fragments of "formContents"
 @param isEdit 更新処理であるか. true: 更新処理. false: 更新処理以外(=登録処理)
 ================================================== -->
 <div th:fragment="formContents(isEdit)">
-  <!-- 【解説】th:field="*{squadNumber}" で、playerForm のプロパティとバインディングしています -->
   <!-- squadNumber -->
   <fieldset class="form-group"
     th:classappend="${#fields.hasErrors('squadNumber')}? 'has-danger'"
