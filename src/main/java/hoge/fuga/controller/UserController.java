@@ -17,7 +17,7 @@ public class UserController {
      * @return ログイン画面
      */
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    String index() {
+    String login() {
         // ログイン画面を表示します.
         return "users/login";
     }
