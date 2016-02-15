@@ -1,4 +1,4 @@
-package hoge.fuga.web;
+package hoge.fuga.form;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

@@ -25,11 +25,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import hoge.fuga.common.code.CodeConsts;
 import hoge.fuga.entity.Nationality;
 import hoge.fuga.entity.Player;
+import hoge.fuga.form.PlayerForm;
+import hoge.fuga.form.PlayerForm.Insert;
+import hoge.fuga.form.PlayerForm.Update;
 import hoge.fuga.service.NationalityService;
 import hoge.fuga.service.PlayerService;
-import hoge.fuga.web.PlayerForm;
-import hoge.fuga.web.PlayerForm.Insert;
-import hoge.fuga.web.PlayerForm.Update;
 
 /**
  * 選手の Controller クラス.
