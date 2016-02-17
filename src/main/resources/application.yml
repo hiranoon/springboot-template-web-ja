@@ -8,6 +8,9 @@ security:
   basic:
     enabled: false # basic認証を無効化
 ---
+logging:
+  level:
+    hoge.fuga: DEBUG
 spring:
   profiles: dev
   datasource:
@@ -22,6 +25,9 @@ spring:
     hibernate:
       ddl-auto: none # DDLの実行をJPAでは行わない
 ---
+logging:
+  level:
+    hoge.fuga: INFO
 spring:
   profiles: heroku
   datasource:

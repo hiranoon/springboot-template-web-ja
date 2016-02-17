@@ -17,6 +17,8 @@
       <input type="hidden" name="id" th:value="*{id}">
       <input type="hidden" name="version" th:value="*{version}">
       <button type="submit" class="btn btn-primary">更新</button>
+      <!-- Token -->
+      <token controller="player" namespace="edit">
     </form>
   </div><!-- /.container -->
 </body>
