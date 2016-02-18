@@ -93,9 +93,7 @@ public class TransactionTokenInterceptor implements HandlerInterceptor {
         // 同値であるか検証します.
         if (sessionToken == null || displayToken == null || !sessionToken.equals(displayToken)) {
             logger.error("Tokenが一致しません. 画面のToken:{} セッションのToken:{}", displayToken, sessionToken);
-
-// TODO Exceptionを投げる！
-
+            throw new InvalidTransactionTokenException(sessionToken, displayToken);
         }
         // セッションにキャッシュされている Token を削除します.
         if (sessionToken != null) {
