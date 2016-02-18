@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hoge.fuga.common.code.CodeConsts;
+import hoge.fuga.common.token.TransactionToken;
+import hoge.fuga.common.token.TransactionTokenType;
 import hoge.fuga.entity.Nationality;
 import hoge.fuga.entity.Player;
 import hoge.fuga.form.PlayerForm;
@@ -89,6 +91,7 @@ public class PlayerController {
      * @return 選手の登録画面
      */
     @RequestMapping(value = "add", method = RequestMethod.GET)
+    @TransactionToken(value = "add", type = TransactionTokenType.PUBLISH)
     String add(Model model) {
         // プルダウン用にすべての Nationality をセットします.
         List<Nationality> nationalities = nationalityService.findAll();
@@ -108,6 +111,7 @@ public class PlayerController {
      * @return 選手の一覧画面.
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
+    @TransactionToken(value = "add", type = TransactionTokenType.VALIDATE)
     String create(
             @Validated({Insert.class, Default.class}) PlayerForm form,
             BindingResult result,
@@ -135,6 +139,7 @@ public class PlayerController {
      * @return 選手の更新画面
      */
     @RequestMapping(value = "{id}/edit", method = RequestMethod.GET)
+    @TransactionToken(value = "edit", type = TransactionTokenType.PUBLISH)
     String edit(
             @PathVariable("id") Integer id,
             PlayerForm form,
@@ -163,6 +168,7 @@ public class PlayerController {
      * @return 選手の一覧画面
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
+    @TransactionToken(value = "edit", type = TransactionTokenType.VALIDATE)
     String update(
             @Validated({Update.class, Default.class}) PlayerForm form,
             BindingResult result,

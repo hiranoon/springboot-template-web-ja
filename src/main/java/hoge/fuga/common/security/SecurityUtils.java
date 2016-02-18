@@ -1,5 +1,7 @@
 package hoge.fuga.common.security;
 
+import java.util.Optional;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -25,15 +27,15 @@ public class SecurityUtils {
      * ただし、Service クラスなどでは、 Controller から順次引数で渡していく必要があります.
      * これを避けるために当該メソッドを用意しています.
      * </p>
-     * @return 認証済みの {@link UserDetails}. 認証されていない場合は null を返却します.
+     * @return 認証済みの {@link UserDetails}. 認証されていない場合は empty() を返却します.
      */
-    public static UserDetails getUserDetails() {
+    public static Optional<UserDetails> getUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        // 認証されていない場合は null を返却します.
-        if (authentication == null) {
-            return null;
+        // 認証されていない場合は empty() を返却します.
+        if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
+            return Optional.empty();
         }
         // UserDetails を返却します.
-        return (UserDetails) authentication.getPrincipal();
+        return Optional.of((UserDetails)authentication.getPrincipal());
     }
 }
